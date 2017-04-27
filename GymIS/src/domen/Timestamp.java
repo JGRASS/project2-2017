@@ -1,10 +1,10 @@
 package domen;
 
-import java.util.GregorianCalendar;
+import java.sql.Date;
 
 public class Timestamp {
 	private int id;
-	private GregorianCalendar timestamp;
+	private Date timestamp;
 
 	public int getId() {
 		return id;
@@ -14,12 +14,17 @@ public class Timestamp {
 		this.id = id;
 	}
 
-	public GregorianCalendar getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(GregorianCalendar timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + getId() + " Timestamp: " + getTimestamp();
 	}
 
 }

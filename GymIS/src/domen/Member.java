@@ -1,6 +1,6 @@
 package domen;
 
-import java.util.GregorianCalendar;
+import java.sql.Date;
 
 public class Member {
 
@@ -8,18 +8,18 @@ public class Member {
 	private String firstName;
 	private String lastName;
 	private char gender;
-	private GregorianCalendar birthdate;
+	private Date birthdate;
 	private String phoneNumber;
-	private GregorianCalendar startDate;
-	private GregorianCalendar endDate;
+	private Date startDate;
+	private Date endDate;
 	private double height;
 	private double weight;
 
 	public Member() {
 	}
 
-	public Member(int id, String firstName, String lastName, char gender, GregorianCalendar birthdate,
-			String phoneNumber, GregorianCalendar startDate, GregorianCalendar endDate, double height, double weight) {
+	public Member(int id, String firstName, String lastName, char gender, Date birthdate,
+			String phoneNumber, Date startDate, Date endDate, double height, double weight) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -32,8 +32,8 @@ public class Member {
 		this.weight = weight;
 	}
 
-	public Member(int id, String firstName, String lastName, char gender, GregorianCalendar startDate,
-			GregorianCalendar endDate) {
+	public Member(int id, String firstName, String lastName, char gender, Date startDate,
+			Date endDate) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -74,11 +74,11 @@ public class Member {
 		this.gender = gender;
 	}
 
-	public GregorianCalendar getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(GregorianCalendar birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -90,19 +90,19 @@ public class Member {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public GregorianCalendar getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(GregorianCalendar startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public GregorianCalendar getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(GregorianCalendar endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -134,6 +134,15 @@ public class Member {
 		}
 		
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + getId() +" Ime: " + getFirstName() + 
+				" Prezime: " + getLastName() + " Pol: " + getGender()
+				+ " Datum rodjenja: " + getBirthdate() + " Tel: " + getPhoneNumber() + 
+				" Upis: " + getStartDate() + " Clanarina do: " + getEndDate() + 
+				" Visna: " + getHeight() + " Tezina: " + getWeight();
 	}
 
 }

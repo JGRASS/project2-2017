@@ -19,6 +19,10 @@ public class BodyMassIndex {
 		this.bmiValue = (weight / (height*height)) * 10000;
 	}
 	
+	@Override
+	public String toString() {
+		return "ID: " + getId() + " BMI Value: " + getBmiValue();
+	}
 	
 
 }

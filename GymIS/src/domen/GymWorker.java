@@ -39,6 +39,10 @@ public class GymWorker {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "ID: " + getId() + " Username: " + getUsername() + " Password: " + getPassword();
+	}
 
 
 }
