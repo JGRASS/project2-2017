@@ -2,6 +2,7 @@ package domen;
 
 import java.sql.Date;
 
+
 public class Member {
 
 	private int id;
@@ -18,8 +19,8 @@ public class Member {
 	public Member() {
 	}
 
-	public Member(int id, String firstName, String lastName, char gender, Date birthdate,
-			String phoneNumber, Date startDate, Date endDate, double height, double weight) {
+	public Member(int id, String firstName, String lastName, char gender, Date birthdate, String phoneNumber,
+			Date startDate, Date endDate, double height, double weight) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -32,8 +33,7 @@ public class Member {
 		this.weight = weight;
 	}
 
-	public Member(int id, String firstName, String lastName, char gender, Date startDate,
-			Date endDate) {
+	public Member(int id, String firstName, String lastName, char gender, Date startDate, Date endDate) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -47,7 +47,10 @@ public class Member {
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		if (id >= 0)
+			this.id = id;
+		else
+			throw new RuntimeException();
 	}
 
 	public String getFirstName() {
@@ -55,7 +58,10 @@ public class Member {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		if (firstName != null)
+			this.firstName = firstName;
+		else
+			throw new RuntimeException();
 	}
 
 	public String getLastName() {
@@ -63,7 +69,10 @@ public class Member {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		if (lastName != null)
+			this.lastName = lastName;
+		else
+			throw new RuntimeException();
 	}
 
 	public char getGender() {
@@ -121,28 +130,26 @@ public class Member {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null) {
 			if (obj instanceof Member) {
-				
+
 				Member m = (Member) obj;
 				if (m.getId() == this.getId())
 					return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ID: " + getId() +" Ime: " + getFirstName() + 
-				" Prezime: " + getLastName() + " Pol: " + getGender()
-				+ " Datum rodjenja: " + getBirthdate() + " Tel: " + getPhoneNumber() + 
-				" Upis: " + getStartDate() + " Clanarina do: " + getEndDate() + 
-				" Visna: " + getHeight() + " Tezina: " + getWeight();
+		return "ID: " + getId() + " Ime: " + getFirstName() + " Prezime: " + getLastName() + " Pol: " + getGender()
+				+ " Datum rodjenja: " + getBirthdate() + " Tel: " + getPhoneNumber() + " Upis: " + getStartDate()
+				+ " Clanarina do: " + getEndDate() + " Visna: " + getHeight() + " Tezina: " + getWeight();
 	}
 
 }
