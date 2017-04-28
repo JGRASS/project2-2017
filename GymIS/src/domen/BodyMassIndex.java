@@ -16,7 +16,9 @@ public class BodyMassIndex {
 		return bmiValue;
 	}
 	public void setBmiValue(double height, double weight) {
-		this.bmiValue = (weight / (height*height)) * 10000;
+		if (height != 0 && weight != 0)
+			this.bmiValue = (weight / (height*height)) * 10000;
+		else this.bmiValue = 0;
 	}
 	
 	@Override
