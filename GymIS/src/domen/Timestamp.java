@@ -1,10 +1,12 @@
 package domen;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class Timestamp {
 	private int id;
-	private Date timestamp;
+	private Date date;
+	private Time time;
 
 	public int getId() {
 		return id;
@@ -14,17 +16,25 @@ public class Timestamp {
 		this.id = id;
 	}
 
-	public Date getTimestamp() {
-		return timestamp;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+	public void setDate(Date date) {
+		this.date = date;
 	}
-	
+
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
+	}
+
 	@Override
 	public String toString() {
-		return "ID: " + getId() + " Timestamp: " + getTimestamp();
+		return "ID: " + getId() + " Date: " + getDate() + " Time: " + getTime();
 	}
 
 }

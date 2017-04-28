@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import connection.DBConnector;
 import domen.BodyMassIndex;
 import domen.Member;
+import domen.Timestamp;
 
 public class Model {
 
@@ -292,6 +293,47 @@ public class Model {
 			return true;
 		} catch (SQLDataException e) {
 			return false;
+		}
+	}
+	
+	public LinkedList<Timestamp> getEvidenceOfMember(int memId) throws SQLException{
+		LinkedList<Timestamp> tempLst = new LinkedList<Timestamp>();
+		Connection con = connector.connect();
+		String query = "SELECT id,timeStmp FROM Evidence WHERE membersId=?";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setInt(1, memId);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()){ 
+			Timestamp tempTimeStamp = new Timestamp();
+			
+			tempTimeStamp.setId(rs.getInt(1));
+			tempTimeStamp.setDate(rs.getDate(2));
+			tempTimeStamp.setTime(rs.getTime(2));
+			
+			tempLst.add(tempTimeStamp);
+		}
+		
+		rs.close();
+		ps.close();
+		con.close();
+		return tempLst;
+		
+	}
+	
+	public static void main(String[] args) {
+		Model mod = new Model();
+		
+		LinkedList<Timestamp> timestamps = new LinkedList<Timestamp>();
+		
+		try {
+			timestamps = mod.getEvidenceOfMember(2);
+			for (int i = 0; i < timestamps.size(); i++) {
+				System.out.println(timestamps.get(i));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
