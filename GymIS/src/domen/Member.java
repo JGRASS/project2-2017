@@ -47,10 +47,7 @@ public class Member {
 	}
 
 	public void setId(int id) {
-		if (id >= 0)
-			this.id = id;
-		else
-			throw new RuntimeException();
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -58,10 +55,7 @@ public class Member {
 	}
 
 	public void setFirstName(String firstName) {
-		if (firstName != null)
-			this.firstName = firstName;
-		else
-			throw new RuntimeException();
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -69,10 +63,7 @@ public class Member {
 	}
 
 	public void setLastName(String lastName) {
-		if (lastName != null)
-			this.lastName = lastName;
-		else
-			throw new RuntimeException();
+		this.lastName = lastName;
 	}
 
 	public char getGender() {
