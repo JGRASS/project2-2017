@@ -1,0 +1,110 @@
+package gui;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+
+public class ShowEvidenceGUI extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6588263387146736360L;
+	
+	private JPanel contentPane;
+	private JLabel lblId;
+	private JTextField textField;
+	private JButton btnPrikaziEvidenciju;
+	private JButton btnOdustani;
+	private JLabel lblNePostojiTakav;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ShowEvidenceGUI frame = new ShowEvidenceGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ShowEvidenceGUI() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ShowEvidenceGUI.class.getResource("/com/sun/javafx/scene/web/skin/AlignLeft_16x16_JFX.png")));
+		setTitle("Prikazi evidenciju za clana");
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 354, 178);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(getLblId());
+		contentPane.add(getTextField());
+		contentPane.add(getBtnPrikaziEvidenciju());
+		contentPane.add(getBtnOdustani());
+		contentPane.add(getLblNePostojiTakav());
+		lblNePostojiTakav.setVisible(false);
+	}
+
+	private JLabel getLblId() {
+		if (lblId == null) {
+			lblId = new JLabel("ID:");
+			lblId.setFont(new Font("Tahoma", Font.BOLD, 13));
+			lblId.setBounds(58, 45, 46, 14);
+		}
+		return lblId;
+	}
+	private JTextField getTextField() {
+		if (textField == null) {
+			textField = new JTextField();
+			textField.setBounds(114, 43, 86, 20);
+			textField.setColumns(10);
+		}
+		return textField;
+	}
+	private JButton getBtnPrikaziEvidenciju() {
+		if (btnPrikaziEvidenciju == null) {
+			btnPrikaziEvidenciju = new JButton("Prikazi evidenciju");
+			btnPrikaziEvidenciju.setBounds(30, 103, 140, 23);
+		}
+		return btnPrikaziEvidenciju;
+	}
+	private JButton getBtnOdustani() {
+		if (btnOdustani == null) {
+			btnOdustani = new JButton("Odustani");
+			btnOdustani.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			btnOdustani.setBounds(180, 103, 140, 23);
+		}
+		return btnOdustani;
+	}
+	private JLabel getLblNePostojiTakav() {
+		if (lblNePostojiTakav == null) {
+			lblNePostojiTakav = new JLabel("Ne postoji takav clan!");
+			lblNePostojiTakav.setForeground(Color.RED);
+			lblNePostojiTakav.setBounds(114, 74, 168, 14);
+		}
+		return lblNePostojiTakav;
+	}
+}
