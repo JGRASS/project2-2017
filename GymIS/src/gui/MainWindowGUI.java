@@ -79,7 +79,7 @@ public class MainWindowGUI extends JFrame {
 		contentPane.add(getSouthPanel(), BorderLayout.SOUTH);
 		contentPane.add(getScrollPane(), BorderLayout.CENTER);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindowGUI.class.getResource("/resources/1493411578_app_type_gym_512px_GREY.png")));
-		
+		this.setLocationRelativeTo(null);
 
 	}
 
