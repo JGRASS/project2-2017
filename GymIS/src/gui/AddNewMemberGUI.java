@@ -6,9 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -16,7 +18,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AddNewMemberGUI extends JFrame {
+public class AddNewMemberGUI extends JDialog {
 
 	/**
 	 * 
@@ -109,6 +111,8 @@ public class AddNewMemberGUI extends JFrame {
 		contentPane.add(getLblobaveznaPolja());
 		contentPane.add(getLabel_1());
 		this.setLocationRelativeTo(null);
+		this.setModal(true);
+		
 		
 	}
 

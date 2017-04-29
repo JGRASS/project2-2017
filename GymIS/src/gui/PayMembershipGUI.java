@@ -9,11 +9,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class PayMembershipGUI extends JFrame {
+public class PayMembershipGUI extends JDialog {
 
 	/**
 	 * 
@@ -68,6 +70,7 @@ public class PayMembershipGUI extends JFrame {
 		contentPane.add(getBtnOdustani());
 		contentPane.add(getLblNepostojeciClanIli());
 		this.setLocationRelativeTo(null);
+		this.setModal(true);
 	}
 
 	private JLabel getLblId() {

@@ -13,12 +13,15 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 import java.awt.ComponentOrientation;
+
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class MainWindowGUI extends JFrame {
@@ -45,6 +48,7 @@ public class MainWindowGUI extends JFrame {
 	private JMenu mnFile;
 	private JMenu mnAbout;
 	private JButton btnEvidencijaDolazaka;
+	private JButton btnEvidentiraj;
 
 	/**
 	 * Launch the application.
@@ -94,6 +98,7 @@ public class MainWindowGUI extends JFrame {
 			eastPanel.add(getBtnPretraga());
 			eastPanel.add(getBtnUplata());
 			eastPanel.add(getBtnEvidencijaDolazaka());
+			eastPanel.add(getBtnEvidentiraj());
 			eastPanel.add(getLabel());
 			
 //			lblLogo = new JLabel(logo);
@@ -125,6 +130,11 @@ public class MainWindowGUI extends JFrame {
 	private JButton getBtnDodajNovog() {
 		if (btnDodajNovog == null) {
 			btnDodajNovog = new JButton("Dodaj novog");
+			btnDodajNovog.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					 new AddNewMemberGUI().setVisible(true);
+				}
+			});
 			btnDodajNovog.setPreferredSize(new Dimension(120, 23));
 		}
 		return btnDodajNovog;
@@ -132,6 +142,11 @@ public class MainWindowGUI extends JFrame {
 	private JButton getBtnIzmeniClana() {
 		if (btnIzmeniClana == null) {
 			btnIzmeniClana = new JButton("Izmeni clana");
+			btnIzmeniClana.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new EditMemberGUI().setVisible(true);
+				}
+			});
 			btnIzmeniClana.setPreferredSize(new Dimension(120, 23));
 		}
 		return btnIzmeniClana;
@@ -139,6 +154,11 @@ public class MainWindowGUI extends JFrame {
 	private JButton getBtnIzbrisiClana() {
 		if (btnIzbrisiClana == null) {
 			btnIzbrisiClana = new JButton("Izbrisi clana");
+			btnIzbrisiClana.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new RemoveMemberGUI().setVisible(true);
+				}
+			});
 			btnIzbrisiClana.setPreferredSize(new Dimension(120, 23));
 		}
 		return btnIzbrisiClana;
@@ -146,6 +166,11 @@ public class MainWindowGUI extends JFrame {
 	private JButton getBtnPretraga() {
 		if (btnPretraga == null) {
 			btnPretraga = new JButton("Pretraga");
+			btnPretraga.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new FindMemberGUI().setVisible(true);
+				}
+			});
 			btnPretraga.setPreferredSize(new Dimension(120, 23));
 		}
 		return btnPretraga;
@@ -153,6 +178,11 @@ public class MainWindowGUI extends JFrame {
 	private JButton getBtnUplata() {
 		if (btnUplata == null) {
 			btnUplata = new JButton("Uplata");
+			btnUplata.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new PayMembershipGUI().setVisible(true);
+				}
+			});
 			btnUplata.setPreferredSize(new Dimension(120, 23));
 		}
 		return btnUplata;
@@ -273,8 +303,25 @@ public class MainWindowGUI extends JFrame {
 	private JButton getBtnEvidencijaDolazaka() {
 		if (btnEvidencijaDolazaka == null) {
 			btnEvidencijaDolazaka = new JButton("Evidencija");
+			btnEvidencijaDolazaka.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new ShowEvidenceGUI().setVisible(true);
+				}
+			});
 			btnEvidencijaDolazaka.setPreferredSize(new Dimension(120, 23));
 		}
 		return btnEvidencijaDolazaka;
+	}
+	private JButton getBtnEvidentiraj() {
+		if (btnEvidentiraj == null) {
+			btnEvidentiraj = new JButton("Evidentiraj");
+			btnEvidentiraj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new RecordGUI().setVisible(true);
+				}
+			});
+			btnEvidentiraj.setPreferredSize(new Dimension(120, 23));
+		}
+		return btnEvidentiraj;
 	}
 }

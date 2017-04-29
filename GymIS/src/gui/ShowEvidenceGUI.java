@@ -9,11 +9,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class ShowEvidenceGUI extends JFrame {
+public class ShowEvidenceGUI extends JDialog {
 
 	/**
 	 * 
@@ -50,7 +52,7 @@ public class ShowEvidenceGUI extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ShowEvidenceGUI.class.getResource("/com/sun/javafx/scene/web/skin/AlignLeft_16x16_JFX.png")));
 		setTitle("Prikazi evidenciju za clana");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 354, 178);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,6 +64,8 @@ public class ShowEvidenceGUI extends JFrame {
 		contentPane.add(getBtnOdustani());
 		contentPane.add(getLblNePostojiTakav());
 		lblNePostojiTakav.setVisible(false);
+		this.setLocationRelativeTo(null);
+		this.setModal(true);
 	}
 
 	private JLabel getLblId() {

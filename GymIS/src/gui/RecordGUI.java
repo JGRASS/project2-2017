@@ -6,8 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -17,16 +15,17 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class RemoveMemberGUI extends JDialog {
+public class RecordGUI extends JDialog {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2346512954430307786L;
+	private static final long serialVersionUID = 1983850170058781183L;
+	
 	private JPanel contentPane;
 	private JLabel lblId;
 	private JTextField textField;
-	private JButton btnIzbrisi;
+	private JButton btnEvidentiraj;
 	private JButton btnOdustani;
 	private JLabel lblNePostojiTakav;
 
@@ -37,7 +36,7 @@ public class RemoveMemberGUI extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RemoveMemberGUI frame = new RemoveMemberGUI();
+					RecordGUI frame = new RecordGUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,19 +48,18 @@ public class RemoveMemberGUI extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public RemoveMemberGUI() {
-		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(RemoveMemberGUI.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Outdent-Black@2x-rtl.png")));
-		setTitle("Izbrisi clana");
+	public RecordGUI() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RecordGUI.class.getResource("/resources/1493413484_gym.png")));
+		setTitle("Evidentiraj dolazak");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 353, 176);
+		setBounds(100, 100, 430, 197);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.add(getLblId());
 		contentPane.add(getTextField());
-		contentPane.add(getBtnIzbrisi());
+		contentPane.add(getBtnEvidentiraj());
 		contentPane.add(getBtnOdustani());
 		contentPane.add(getLblNePostojiTakav());
 		lblNePostojiTakav.setVisible(false);
@@ -71,46 +69,36 @@ public class RemoveMemberGUI extends JDialog {
 
 	private JLabel getLblId() {
 		if (lblId == null) {
-			lblId = new JLabel("ID: ");
+			lblId = new JLabel("ID:");
 			lblId.setFont(new Font("Tahoma", Font.BOLD, 13));
-			lblId.setBounds(96, 43, 46, 14);
+			lblId.setBounds(64, 47, 46, 14);
 		}
 		return lblId;
 	}
 	private JTextField getTextField() {
 		if (textField == null) {
 			textField = new JTextField();
-			textField.setBounds(154, 41, 144, 20);
+			textField.setBounds(120, 45, 194, 20);
 			textField.setColumns(10);
 		}
 		return textField;
 	}
-	private JButton getBtnIzbrisi() {
-		if (btnIzbrisi == null) {
-			btnIzbrisi = new JButton("Izbrisi");
-			btnIzbrisi.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					int a = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da izbrisete clana?", "Paznja!",
-							JOptionPane.YES_NO_CANCEL_OPTION);
-					if (a == JOptionPane.YES_OPTION) {
-						// TODO
-					}
-						
-				}
-			});
-			btnIzbrisi.setBounds(53, 107, 89, 23);
+	private JButton getBtnEvidentiraj() {
+		if (btnEvidentiraj == null) {
+			btnEvidentiraj = new JButton("Evidentiraj");
+			btnEvidentiraj.setBounds(83, 112, 113, 23);
 		}
-		return btnIzbrisi;
+		return btnEvidentiraj;
 	}
 	private JButton getBtnOdustani() {
 		if (btnOdustani == null) {
 			btnOdustani = new JButton("Odustani");
 			btnOdustani.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
+				public void actionPerformed(ActionEvent e) {
 					dispose();
 				}
 			});
-			btnOdustani.setBounds(189, 107, 89, 23);
+			btnOdustani.setBounds(206, 112, 113, 23);
 		}
 		return btnOdustani;
 	}
@@ -118,7 +106,8 @@ public class RemoveMemberGUI extends JDialog {
 		if (lblNePostojiTakav == null) {
 			lblNePostojiTakav = new JLabel("Ne postoji takav clan!");
 			lblNePostojiTakav.setForeground(Color.RED);
-			lblNePostojiTakav.setBounds(108, 82, 190, 14);
+			lblNePostojiTakav.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblNePostojiTakav.setBounds(126, 87, 194, 14);
 		}
 		return lblNePostojiTakav;
 	}

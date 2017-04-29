@@ -12,9 +12,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.Color;
 
-public class FindMemberGUI extends JFrame {
+public class FindMemberGUI extends JDialog {
 
 	/**
 	 * 
@@ -96,6 +98,7 @@ public class FindMemberGUI extends JFrame {
 		lblNePostojeClanovi.setVisible(false);
 		lblNewLabel.setVisible(false);
 		lblNewLabel_1.setVisible(false);
+		this.setModal(true);
 	}
 
 	private JTabbedPane getTabbedPane() {

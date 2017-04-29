@@ -9,10 +9,14 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class EditMemberGUI extends JFrame {
+public class EditMemberGUI extends JDialog {
 
 	/**
 	 * 
@@ -73,7 +77,7 @@ public class EditMemberGUI extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(EditMemberGUI.class.getResource("/resources/1493411578_app_type_gym_512px_GREY.png")));
 		setTitle("Izmeni clana");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 585, 271);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -111,6 +115,8 @@ public class EditMemberGUI extends JFrame {
 		lblObaveznaPoljaNisu.setVisible(false);
 		lblNePostojiTakav.setVisible(false);
 		label.setVisible(false);
+		this.setLocationRelativeTo(null);
+		this.setModal(true);
 	}
 	private JLabel getLabelIcon() {
 		if (labelIcon == null) {
@@ -318,6 +324,11 @@ public class EditMemberGUI extends JFrame {
 	private JButton getBtnOdustani() {
 		if (btnOdustani == null) {
 			btnOdustani = new JButton("Odustani");
+			btnOdustani.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
 			btnOdustani.setBounds(327, 206, 89, 23);
 		}
 		return btnOdustani;
