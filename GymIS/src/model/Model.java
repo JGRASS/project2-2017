@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
@@ -320,22 +319,6 @@ public class Model {
 		con.close();
 		return tempLst;
 		
-	}
-	
-	public static void main(String[] args) {
-		Model mod = new Model();
-		
-		LinkedList<Timestamp> timestamps = new LinkedList<Timestamp>();
-		
-		try {
-			timestamps = mod.getEvidenceOfMember(2);
-			for (int i = 0; i < timestamps.size(); i++) {
-				System.out.println(timestamps.get(i));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 }
