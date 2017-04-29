@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.LinkedList;
 
 import connection.DBConnector;
+import domen.BodyMassIndex;
 import domen.Member;
+import domen.Timestamp;
 
 public class Model {
 
@@ -172,10 +176,7 @@ public class Model {
 
 	}
 
-	public void payMembership(int id, String date) throws SQLException { // date
-																			// u
-																			// formatu
-																			// "yyyy-mm-dd"
+	public void payMembership(int id, String date) throws SQLException { // date u formatu "yyyy-mm-dd"
 		Connection con = connector.connect();
 		String query = "UPDATE Members SET endDate=? WHERE id=?";
 
@@ -189,4 +190,152 @@ public class Model {
 		con.close();
 	}
 
+	/*
+	First we use findMemberId, method returns object Member,
+	and we fill all TxtFields in GUI with that data
+	then we change attributes we want to change in that Member object
+	then we use updateMember, method UPDATEs all column, nevermind they are changed or not
+	*/
+	
+	public void updateMember(Member m) throws SQLException {
+		Connection con = connector.connect();
+		String query = "UPDATE Members SET "
+				+ "firstName=?, lastName=?, gender=?, birthDate=?, phoneNumber=?, endDate=?, height=?, weight=?"
+				+ " WHERE id=?";
+		
+		PreparedStatement ps = con.prepareStatement(query);
+		int i = 0;
+		ps.setString(++i, m.getFirstName());
+		ps.setString(++i, m.getLastName());
+		ps.setString(++i, String.valueOf(m.getGender()));
+		
+		if (m.getBirthdate() != null) 
+			ps.setDate(++i, m.getEndDate());
+		else 
+			ps.setNull(++i, Types.DATE);
+		
+		
+		if (m.getPhoneNumber() != null)
+			ps.setString(++i, m.getPhoneNumber());
+		else ps.setNull(++i, Types.VARCHAR);
+		
+		ps.setDate(++i, m.getEndDate());
+		
+		if (m.getHeight() != 0.0)
+			ps.setDouble(++i, m.getHeight());//No need for if != null, default value of double is 0.0
+		else ps.setNull(++i, Types.DOUBLE);
+		
+		if (m.getWeight() != 0.0) 
+			ps.setDouble(++i, m.getWeight());
+		else ps.setNull(++i, Types.DOUBLE);
+		
+		ps.setInt(++i, m.getId());
+		
+		ps.executeQuery();
+		
+		ps.close();
+		con.close();
+
+	}
+	
+	//need to implement control when using method
+	//if bmi already exists, it will create another one
+	public void calcBmi(int id) throws SQLException {
+		Connection con = connector.connect();
+		String query = "SELECT height,weight FROM Members WHERE id=?";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setInt(1, id);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		BodyMassIndex tempBmi = new BodyMassIndex();
+		
+		tempBmi.setId(id);
+		rs.next();
+		tempBmi.setBmiValue(rs.getDouble(1), rs.getDouble(2));
+		
+		String queryBmi = "INSERT INTO BMIs(id, bmi) VALUES (?, ?)";
+		ps = con.prepareStatement(queryBmi);
+		ps.setInt(1, tempBmi.getId());
+		ps.setDouble(2, tempBmi.getBmiValue());
+		
+		ps.executeQuery();
+		
+		ps.close();
+		con.close();
+		
+	}
+
+	public void enterRecord(int id) throws SQLException {
+		Connection con = connector.connect();
+		String query = "INSERT INTO Evidence(membersID) VALUES (?)";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setInt(1, id);
+		
+		ps.executeQuery();
+		
+		ps.close();
+		con.close();
+		
+	}
+	
+	public boolean logInGymWorker(String username, String pass) throws SQLException {
+		Connection con = connector.connect();
+		String query = "SELECT id FROM GymWorkers WHERE username=? AND passwrd=?";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setString(1, username);
+		ps.setString(2, pass);
+		
+
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		try{
+			rs.getInt(1);
+			return true;
+		} catch (SQLDataException e) {
+			return false;
+		}
+	}
+	
+	public LinkedList<Timestamp> getEvidenceOfMember(int memId) throws SQLException{
+		LinkedList<Timestamp> tempLst = new LinkedList<Timestamp>();
+		Connection con = connector.connect();
+		String query = "SELECT id,timeStmp FROM Evidence WHERE membersId=?";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setInt(1, memId);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()){ 
+			Timestamp tempTimeStamp = new Timestamp();
+			
+			tempTimeStamp.setId(rs.getInt(1));
+			tempTimeStamp.setDate(rs.getDate(2));
+			tempTimeStamp.setTime(rs.getTime(2));
+			
+			tempLst.add(tempTimeStamp);
+		}
+		
+		rs.close();
+		ps.close();
+		con.close();
+		return tempLst;
+		
+	}
+	
+	public static void main(String[] args) {
+		Model mod = new Model();
+		
+		LinkedList<Timestamp> timestamps = new LinkedList<Timestamp>();
+		
+		try {
+			timestamps = mod.getEvidenceOfMember(2);
+			for (int i = 0; i < timestamps.size(); i++) {
+				System.out.println(timestamps.get(i));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
