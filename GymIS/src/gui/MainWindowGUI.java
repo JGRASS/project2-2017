@@ -15,6 +15,11 @@ import javax.swing.SwingConstants;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 
 
 public class MainWindowGUI extends JFrame {
@@ -31,6 +36,11 @@ public class MainWindowGUI extends JFrame {
 	private JButton btnOdjaviSe;
 	private ImageIcon logo = new ImageIcon("/1493413484_gym.png");;
 	private JLabel label;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private JMenuBar menuBar;
+	private JMenu mnFile;
+	private JMenu mnAbout;
 
 	/**
 	 * Launch the application.
@@ -54,15 +64,16 @@ public class MainWindowGUI extends JFrame {
 	public MainWindowGUI() {
 		setTitle("GymIS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 555, 404);
+		setBounds(100, 100, 867, 494);
+		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getEastPanel(), BorderLayout.EAST);
 		contentPane.add(getSouthPanel(), BorderLayout.SOUTH);
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(MainWindowGUI.class.getResource("/1493411578_app_type_gym_512px_GREY.png")));
+		contentPane.add(getScrollPane(), BorderLayout.CENTER);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindowGUI.class.getResource("/resources/1493411578_app_type_gym_512px_GREY.png")));
 		
 
 	}
@@ -157,5 +168,99 @@ public class MainWindowGUI extends JFrame {
 			label.setBounds(0, 0, 75, 75);
 		}
 		return label;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setViewportView(getTable());
+		}
+		return scrollPane;
+	}
+	private JTable getTable() {
+		if (table == null) {
+			table = new JTable();
+			table.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null, null},
+				},
+				new String[] {
+					"ID", "Ime", "Prezime", "Pol", "Datum rodjenja", "Telefon", "Datum upisa", "Uplacena clanarina do", "Visina", "Tezina"
+				}
+			));
+			table.getColumnModel().getColumn(3).setPreferredWidth(55);
+			table.getColumnModel().getColumn(4).setPreferredWidth(86);
+			table.getColumnModel().getColumn(7).setPreferredWidth(100);
+			table.setName("Tabela");
+		}
+		return table;
+	}
+	private JMenuBar getMenuBar_1() {
+		if (menuBar == null) {
+			menuBar = new JMenuBar();
+			menuBar.add(getMnFile());
+			menuBar.add(getMnAbout());
+		}
+		return menuBar;
+	}
+	private JMenu getMnFile() {
+		if (mnFile == null) {
+			mnFile = new JMenu("File");
+		}
+		return mnFile;
+	}
+	private JMenu getMnAbout() {
+		if (mnAbout == null) {
+			mnAbout = new JMenu("About");
+		}
+		return mnAbout;
 	}
 }
