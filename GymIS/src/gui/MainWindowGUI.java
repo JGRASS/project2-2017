@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
-import java.awt.Component;
 import java.awt.ComponentOrientation;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -24,6 +23,11 @@ import javax.swing.JMenu;
 
 public class MainWindowGUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7138587389972583147L;
+	
 	private JPanel contentPane;
 	private JPanel eastPanel;
 	private JPanel southPanel;
@@ -34,13 +38,13 @@ public class MainWindowGUI extends JFrame {
 	private JButton btnPretraga;
 	private JButton btnUplata;
 	private JButton btnOdjaviSe;
-	private ImageIcon logo = new ImageIcon("/1493413484_gym.png");;
 	private JLabel label;
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JMenuBar menuBar;
 	private JMenu mnFile;
 	private JMenu mnAbout;
+	private JButton btnEvidencijaDolazaka;
 
 	/**
 	 * Launch the application.
@@ -62,9 +66,10 @@ public class MainWindowGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public MainWindowGUI() {
+		setMinimumSize(new Dimension(870, 498));
 		setTitle("GymIS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 867, 494);
+		setBounds(100, 100, 868, 498);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -88,6 +93,7 @@ public class MainWindowGUI extends JFrame {
 			eastPanel.add(getBtnIzbrisiClana());
 			eastPanel.add(getBtnPretraga());
 			eastPanel.add(getBtnUplata());
+			eastPanel.add(getBtnEvidencijaDolazaka());
 			eastPanel.add(getLabel());
 			
 //			lblLogo = new JLabel(logo);
@@ -179,6 +185,7 @@ public class MainWindowGUI extends JFrame {
 	private JTable getTable() {
 		if (table == null) {
 			table = new JTable();
+			table.setEnabled(false);
 			table.setModel(new DefaultTableModel(
 				new Object[][] {
 					{null, null, null, null, null, null, null, null, null, null},
@@ -262,5 +269,12 @@ public class MainWindowGUI extends JFrame {
 			mnAbout = new JMenu("About");
 		}
 		return mnAbout;
+	}
+	private JButton getBtnEvidencijaDolazaka() {
+		if (btnEvidencijaDolazaka == null) {
+			btnEvidencijaDolazaka = new JButton("Evidencija");
+			btnEvidencijaDolazaka.setPreferredSize(new Dimension(120, 23));
+		}
+		return btnEvidencijaDolazaka;
 	}
 }
