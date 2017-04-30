@@ -51,7 +51,7 @@ public class RemoveMemberGUI extends JDialog {
 	 */
 	public RemoveMemberGUI() {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(RemoveMemberGUI.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Outdent-Black@2x-rtl.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RemoveMemberGUI.class.getResource("/resources/1493413484_gym.png")));
 		setTitle("Izbrisi clana");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 353, 176);

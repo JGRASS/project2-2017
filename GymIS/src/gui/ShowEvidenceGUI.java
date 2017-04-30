@@ -49,7 +49,7 @@ public class ShowEvidenceGUI extends JDialog {
 	 * Create the frame.
 	 */
 	public ShowEvidenceGUI() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ShowEvidenceGUI.class.getResource("/com/sun/javafx/scene/web/skin/AlignLeft_16x16_JFX.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ShowEvidenceGUI.class.getResource("/resources/1493413484_gym.png")));
 		setTitle("Prikazi evidenciju za clana");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
