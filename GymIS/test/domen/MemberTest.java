@@ -64,22 +64,11 @@ public class MemberTest {
 		member.setId(5);
 		assertEquals(5, member.getId());
 	}
-	
-	@Test (expected = java.lang.RuntimeException.class)
-	public void testSetIdNegativeValue() {
-		member.setId(-5);
-		
-	}
-	
+
 	@Test
 	public void testSetFirstName() {
 		member.setFirstName("Filip");
 		assertEquals("Filip", member.getFirstName());
-	}
-	
-	@Test (expected = java.lang.RuntimeException.class)
-	public void testSetFirstNameNull() {
-		member.setFirstName(null);
 	}
 
 	@Test
@@ -87,18 +76,13 @@ public class MemberTest {
 		member.setLastName("Petrovic");
 		assertEquals("Petrovic", member.getLastName());
 	}
-	
-	@Test (expected = java.lang.RuntimeException.class)
-	public void testSetLastNameNull() {
-		member.setLastName(null);
-	}
 
 	@Test
 	public void testSetGender() {
 		member.setGender('M');
 		assertEquals('M', member.getGender());
 	}
-	
+
 	@Test
 	public void testSetBirthdate() {
 		member.setBirthdate(Date.valueOf("1900-01-01"));
@@ -137,9 +121,12 @@ public class MemberTest {
 
 	@Test
 	public void testToString() {
-		member = new Member(1, "Filip", "Petrovic", 'M', Date.valueOf("1996-01-01"), "0631234567", Date.valueOf("2016-01-01"), Date.valueOf("2017-01-01"), 175.5, 80.2);
-		assertEquals("ID: 1 Ime: Filip Prezime: Petrovic Pol: M Datum rodjenja: 1996-01-01 Tel: 0631234567 Upis: 2016-01-01 Clanarina do: 2017-01-01 Visna: 175.5 Tezina: 80.2", member.toString());
-		
+		member = new Member(1, "Filip", "Petrovic", 'M', Date.valueOf("1996-01-01"), "0631234567",
+				Date.valueOf("2016-01-01"), Date.valueOf("2017-01-01"), 175.5, 80.2);
+		assertEquals(
+				"ID: 1 Ime: Filip Prezime: Petrovic Pol: M Datum rodjenja: 1996-01-01 Tel: 0631234567 Upis: 2016-01-01 Clanarina do: 2017-01-01 Visna: 175.5 Tezina: 80.2",
+				member.toString());
+
 	}
 
 }
