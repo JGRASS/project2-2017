@@ -142,13 +142,13 @@ public class Model {
 
 	}
 
-	public LinkedList<Member> findMembersGender(char g) throws SQLException {
-		LinkedList<Member> tempMembers = new LinkedList<Member>();
+	public LinkedList<Member> findMembersLastName(String lastName) throws SQLException {
+		LinkedList<Member> tempMemebers = new LinkedList<Member>();
 		Connection con = connector.connect();
-		String query = "SELECT * FROM Members WHERE gender=?";
+		String query = "SELECT * FROM Members WHERE lastName=?";
 
 		PreparedStatement ps = con.prepareStatement(query);
-		ps.setString(1, String.valueOf(g));
+		ps.setString(1, lastName);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
@@ -165,12 +165,13 @@ public class Model {
 			m.setHeight(rs.getDouble(++i));
 			m.setWeight(rs.getDouble(++i));
 
-			tempMembers.add(m);
+			tempMemebers.add(m);
 		}
+
 		rs.close();
 		ps.close();
 		con.close();
-		return tempMembers;
+		return tempMemebers;
 
 	}
 
@@ -235,6 +236,7 @@ public class Model {
 		con.close();
 
 	}
+
 
 	public void enterRecord(int id) throws SQLException {
 		Connection con = connector.connect();
