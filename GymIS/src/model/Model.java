@@ -9,7 +9,6 @@ import java.sql.Types;
 import java.util.LinkedList;
 
 import connection.DBConnector;
-import domen.BodyMassIndex;
 import domen.Member;
 import domen.Timestamp;
 
@@ -235,34 +234,6 @@ public class Model {
 		ps.close();
 		con.close();
 
-	}
-	
-	//need to implement control when using method
-	//if bmi already exists, it will create another one
-	public void calcBmi(int id) throws SQLException {
-		Connection con = connector.connect();
-		String query = "SELECT height,weight FROM Members WHERE id=?";
-		PreparedStatement ps = con.prepareStatement(query);
-		ps.setInt(1, id);
-		
-		ResultSet rs = ps.executeQuery();
-		
-		BodyMassIndex tempBmi = new BodyMassIndex();
-		
-		tempBmi.setId(id);
-		rs.next();
-		tempBmi.setBmiValue(rs.getDouble(1), rs.getDouble(2));
-		
-		String queryBmi = "INSERT INTO BMIs(id, bmi) VALUES (?, ?)";
-		ps = con.prepareStatement(queryBmi);
-		ps.setInt(1, tempBmi.getId());
-		ps.setDouble(2, tempBmi.getBmiValue());
-		
-		ps.executeQuery();
-		
-		ps.close();
-		con.close();
-		
 	}
 
 	public void enterRecord(int id) throws SQLException {
