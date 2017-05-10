@@ -109,36 +109,43 @@ public class MainWindowGUI extends JFrame {
 		}
 		return southPanel;
 	}
+	
+	protected void showMembersInTable(LinkedList<Member> members) {
+
+		//Clear table
+		for(int i = 0; i < 50; i++) {
+			for (int j = 0; j < 10; j++) {
+				table.setValueAt("", i, j);
+			}
+		}
+		// end Clear table
+		if (members != null) {
+			int i = 0;
+			for (Member m: members) {
+				int j = -1;
+				table.setValueAt(m.getId(), i, ++j);
+				table.setValueAt(m.getFirstName(), i, ++j);
+				table.setValueAt(m.getLastName(), i, ++j);
+				table.setValueAt(m.getGender(), i, ++j);
+				table.setValueAt(m.getBirthdate(), i, ++j);
+				table.setValueAt(m.getPhoneNumber(), i, ++j);
+				table.setValueAt(m.getStartDate(), i, ++j);
+				table.setValueAt(m.getEndDate(), i, ++j);
+				table.setValueAt(m.getHeight(), i, ++j);
+				table.setValueAt(m.getWeight(), i, ++j);
+				i++;
+			}
+		}
+	
+	}
+	
 	private JButton getBtnUcitajSveClanove() {
 		if (btnUcitajSveClanove == null) {
 			btnUcitajSveClanove = new JButton("Ucitaj sve clanove");
 			btnUcitajSveClanove.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					//Clear table
-					for(int i = 0; i < 50; i++) {
-						for (int j = 0; j < 10; j++) {
-							table.setValueAt("", i, j);
-						}
-					}
-					// end Clear table
 					LinkedList<Member> tempMembers = GUIController.getAllMembers();
-					if (tempMembers != null) {
-						int i = 0;
-						for (Member m: tempMembers) {
-							int j = -1;
-							table.setValueAt(m.getId(), i, ++j);
-							table.setValueAt(m.getFirstName(), i, ++j);
-							table.setValueAt(m.getLastName(), i, ++j);
-							table.setValueAt(m.getGender(), i, ++j);
-							table.setValueAt(m.getBirthdate(), i, ++j);
-							table.setValueAt(m.getPhoneNumber(), i, ++j);
-							table.setValueAt(m.getStartDate(), i, ++j);
-							table.setValueAt(m.getEndDate(), i, ++j);
-							table.setValueAt(m.getHeight(), i, ++j);
-							table.setValueAt(m.getWeight(), i, ++j);
-							i++;
-						}
-					}
+					showMembersInTable(tempMembers);
 				}
 			});
 		}

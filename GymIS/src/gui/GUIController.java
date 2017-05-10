@@ -124,6 +124,18 @@ public class GUIController {
 		return Controller.updateMember(id, firstName, lastName, gender, birth, phoneNumber, end, h, w);
 	}
 
+	public static LinkedList<Member> findMembersName(String name) {
+		return Controller.findMembersName(name);
+	}
+
+	public static void showMembersInTable(LinkedList<Member> members) {
+		mainWindowGUI.showMembersInTable(members);
+	}
+
+	public static LinkedList<Member> findMembersLastName(String lastName) {
+		return Controller.findMembersLastName(lastName);
+	}
+
 	
 
 }

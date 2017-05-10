@@ -8,12 +8,19 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+
+import domen.Member;
+import java.awt.event.ActionEvent;
 
 public class FindMemberGUI extends JDialog {
 
@@ -166,6 +173,44 @@ public class FindMemberGUI extends JDialog {
 	private JButton getBtnPronadji() {
 		if (btnPronadji == null) {
 			btnPronadji = new JButton("Pronadji");
+			btnPronadji.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					lblImePrikaz.setText("");
+					lblPrezimePrikaz.setText("");
+					lblPolPrikaz.setText("");
+					lblClanarinaPrikaz.setText("");
+					lblDatumUpisaPrikaz.setText("");
+					lblDatumRodjenjaPrikaz.setText("");
+					lblTelefonPrikaz.setText("");
+					lblVisinaPrikaz.setText("");
+					lblTezinaPrikaz.setText("");
+					lblNePostojiClan.setVisible(false);
+					
+					int id;
+					try {
+						id = Integer.parseInt(textFieldId.getText());
+					} catch (NumberFormatException e) {
+						JOptionPane.showMessageDialog(null, "Pogresan unos!", "Greska!", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
+					Member m = GUIController.findMemberId(id);
+					if(m == null) {
+						lblNePostojiClan.setVisible(true);
+						return;
+					}
+					lblImePrikaz.setText(m.getFirstName());
+					lblPrezimePrikaz.setText(m.getLastName());
+					lblPolPrikaz.setText(m.getGender() + "");
+					lblClanarinaPrikaz.setText(m.getEndDate().toString());
+					lblDatumUpisaPrikaz.setText(m.getStartDate().toString());
+					lblDatumRodjenjaPrikaz.setText(m.getBirthdate().toString());
+					lblTelefonPrikaz.setText(m.getPhoneNumber());
+					lblVisinaPrikaz.setText(m.getHeight() + "");
+					lblTezinaPrikaz.setText(m.getWeight() + "");
+					
+				}
+			});
 			btnPronadji.setBounds(162, 7, 89, 23);
 		}
 		return btnPronadji;
@@ -330,6 +375,24 @@ public class FindMemberGUI extends JDialog {
 	private JButton getBtnPretragaIme() {
 		if (btnPretragaIme == null) {
 			btnPretragaIme = new JButton("Pronadji");
+			btnPretragaIme.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					lblSviClanoviSa.setVisible(false);
+					lblNePostojeClanovi.setVisible(false);
+					String name = textFieldIme.getText();
+					if(name == null || name.isEmpty()) {
+						lblNePostojeClanovi.setVisible(true);
+						return;
+					}
+					LinkedList<Member> members = GUIController.findMembersName(name);
+					if(members == null || members.size() == 0) {
+						lblNePostojeClanovi.setVisible(true);
+						return;
+					}
+					GUIController.showMembersInTable(members);
+					lblSviClanoviSa.setVisible(true);
+				}
+			});
 			btnPretragaIme.setBounds(236, 7, 89, 23);
 		}
 		return btnPretragaIme;
@@ -370,6 +433,26 @@ public class FindMemberGUI extends JDialog {
 	private JButton getBtnPronadji_1() {
 		if (btnPronadji_1 == null) {
 			btnPronadji_1 = new JButton("Pronadji");
+			btnPronadji_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					lblNewLabel.setVisible(false);
+					lblNewLabel_1.setVisible(false);
+					String lastName = textFieldPrezime.getText();
+					if(lastName == null || lastName.isEmpty()) {
+						lblNewLabel_1.setVisible(true);
+						return;
+					}
+					LinkedList<Member> members = GUIController.findMembersLastName(lastName);
+					if(members == null || members.size() == 0) {
+						lblNewLabel_1.setVisible(true);
+						return;
+					}
+					GUIController.showMembersInTable(members);
+					lblNewLabel.setVisible(true);
+				
+					
+				}
+			});
 			btnPronadji_1.setBounds(282, 7, 89, 23);
 		}
 		return btnPronadji_1;

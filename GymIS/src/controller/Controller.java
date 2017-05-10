@@ -9,6 +9,8 @@ import model.Model;
 import system_operations.SOAddNewMember;
 import system_operations.SOEditMember;
 import system_operations.SOFindMemberId;
+import system_operations.SOFindMembersFirstName;
+import system_operations.SOFindMembersLastName;
 import system_operations.SOGetAllMembers;
 import system_operations.SOLogIn;
 import system_operations.SORemoveMember;
@@ -46,6 +48,16 @@ public class Controller {
 	public static boolean updateMember(int id, String firstName, String lastName, char gender, Date birth,
 			String phoneNumber, Date end, double h, double w) {
 		return SOEditMember.execute(model, id, firstName, lastName, gender, birth, phoneNumber, end, h, w);
+	}
+
+
+	public static LinkedList<Member> findMembersName(String name) {
+		return SOFindMembersFirstName.execute(model, name);
+	}
+
+
+	public static LinkedList<Member> findMembersLastName(String lastName) {
+		return SOFindMembersLastName.execute(model, lastName);
 	}
 	
 }
