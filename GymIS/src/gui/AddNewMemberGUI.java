@@ -5,9 +5,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import domen.Member;
+
 import java.awt.Toolkit;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -16,6 +20,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.awt.event.ActionEvent;
 
 public class AddNewMemberGUI extends JDialog {
@@ -267,6 +272,58 @@ public class AddNewMemberGUI extends JDialog {
 	private JButton getBtnDodaj() {
 		if (btnDodaj == null) {
 			btnDodaj = new JButton("Dodaj");
+			btnDodaj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					String firstName = textFieldIme.getText();
+					String lastName = textFieldPrezime.getText();
+					char gender = comboBox.getSelectedItem().toString().charAt(0);
+					String birthdate = textFieldDatumRodjenja.getText();
+					String phone = textFieldTelefon.getText();
+					String endDate = textFieldClanarina.getText();
+					String height = textFieldVisina.getText();
+					String weight = textFieldTezina.getText();
+					
+					if (firstName == null || firstName == "" || lastName == null || lastName == "" ||
+							endDate == null || endDate == "") {
+						lblObaveznaPoljaNisu.setVisible(true);
+						return;
+					}
+					
+					Date birth, end;
+					double h = 0, w = 0;
+					
+					try {
+						h = Double.parseDouble(height);
+						w = Double.parseDouble(weight);
+					} catch (NumberFormatException e) {
+						
+					}
+					
+					try {
+						end = Date.valueOf(endDate);
+					} catch (Exception e) {
+						lblObaveznaPoljaNisu.setVisible(true);
+						return;
+					}
+					
+					try {
+						birth = Date.valueOf(birthdate);
+					} catch (Exception e2) {
+						birth = null;
+					}
+					
+					//Member m = new Member(1, firstName, lastName, gender, birth, phone, null, end, h, w);
+					
+					boolean added = GUIController.addNewMember(firstName, lastName, gender, birth, phone, end, h, w);
+					
+					if (added) {
+						JOptionPane.showMessageDialog(null, "Novi clan uspesno dodat!");
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Clan nije dodat!", "Greska", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
 			btnDodaj.setBounds(167, 184, 89, 23);
 		}
 		return btnDodaj;

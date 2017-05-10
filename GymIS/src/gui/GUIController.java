@@ -3,10 +3,13 @@ package gui;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Date;
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
 import controller.Controller;
+import domen.Member;
 
 public class GUIController {
 	private static MainWindowGUI mainWindowGUI;
@@ -96,6 +99,16 @@ public class GUIController {
 	
 	public static boolean logIn(String username, String pass) {
 		return Controller.logIn(username, pass);
+	}
+
+	public static LinkedList<Member> getAllMembers() {
+		return Controller.getAllMembers();
+	}
+
+
+	public static boolean addNewMember(String firstName, String lastName, char gender, Date birth, String phone, Date end,
+			double h, double w) {
+		return Controller.addNewMember(firstName, lastName, gender, birth, phone, end, h, w);
 	}
 
 	
