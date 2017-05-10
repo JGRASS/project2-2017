@@ -245,7 +245,7 @@ public class Model {
 		ps.setString(++i, String.valueOf(m.getGender()));
 
 		if (m.getBirthdate() != null)
-			ps.setDate(++i, m.getEndDate());
+			ps.setDate(++i, m.getBirthdate());
 		else
 			ps.setNull(++i, Types.DATE);
 

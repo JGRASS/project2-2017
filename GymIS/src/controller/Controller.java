@@ -8,6 +8,7 @@ import domen.Member;
 import model.Model;
 import system_operations.SOAddNewMember;
 import system_operations.SOEditMember;
+import system_operations.SOEnterRecord;
 import system_operations.SOFindMemberId;
 import system_operations.SOFindMembersFirstName;
 import system_operations.SOFindMembersLastName;
@@ -58,6 +59,11 @@ public class Controller {
 
 	public static LinkedList<Member> findMembersLastName(String lastName) {
 		return SOFindMembersLastName.execute(model, lastName);
+	}
+
+
+	public static boolean enterRecord(int id) {
+		return SOEnterRecord.execute(model, id);
 	}
 	
 }

@@ -136,6 +136,10 @@ public class GUIController {
 		return Controller.findMembersLastName(lastName);
 	}
 
+	public static boolean enterRecord(int id) {
+		return Controller.enterRecord(id);
+	}
+
 	
 
 }

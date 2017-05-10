@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -69,6 +71,29 @@ public class RecordGUI extends JDialog {
 	private JButton getBtnEvidentiraj() {
 		if (btnEvidentiraj == null) {
 			btnEvidentiraj = new JButton("Evidentiraj");
+			btnEvidentiraj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					lblNePostojiTakav.setVisible(false);
+					int id;
+					try {
+						 id = Integer.parseInt(textField.getText());
+					} catch (NumberFormatException e) {
+						lblNePostojiTakav.setVisible(true);
+						return;
+					}
+					int option = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da evidentirate dolazak clana " + id + " ?", "Paznja!", JOptionPane.YES_NO_OPTION);
+					if(option == JOptionPane.YES_OPTION) {
+						if(GUIController.enterRecord(id)) {
+							JOptionPane.showMessageDialog(null, "Evidentirano!");
+							dispose();
+							return;
+						} else {
+							lblNePostojiTakav.setVisible(true);
+						}
+					}
+					
+				}
+			});
 			btnEvidentiraj.setBounds(83, 112, 113, 23);
 		}
 		return btnEvidentiraj;
