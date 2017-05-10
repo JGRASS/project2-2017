@@ -173,6 +173,12 @@ public class MainWindowGUI extends JFrame {
 	private JButton getBtnOdjaviSe() {
 		if (btnOdjaviSe == null) {
 			btnOdjaviSe = new JButton("Odjavi se");
+			btnOdjaviSe.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					dispose();
+					GUIController.main(null);
+				}
+			});
 			btnOdjaviSe.setHorizontalTextPosition(SwingConstants.RIGHT);
 			btnOdjaviSe.setHorizontalAlignment(SwingConstants.RIGHT);
 		}
