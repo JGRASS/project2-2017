@@ -14,6 +14,7 @@ import system_operations.SOFindMembersFirstName;
 import system_operations.SOFindMembersLastName;
 import system_operations.SOGetAllMembers;
 import system_operations.SOLogIn;
+import system_operations.SOPayMembership;
 import system_operations.SORemoveMember;
 
 public class Controller {
@@ -64,6 +65,10 @@ public class Controller {
 
 	public static boolean enterRecord(int id) {
 		return SOEnterRecord.execute(model, id);
+	}
+	
+	public static boolean payMembership(int id, String endDate) {
+		return SOPayMembership.execute(model, id, endDate);
 	}
 	
 }

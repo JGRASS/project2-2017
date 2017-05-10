@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -98,6 +100,28 @@ public class PayMembershipGUI extends JDialog {
 	private JButton getBtnUplati() {
 		if (btnUplati == null) {
 			btnUplati = new JButton("Uplati");
+			btnUplati.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int id;
+					String endDate = textField.getText();
+					try {
+						id = Integer.parseInt(textFieldId.getText());
+					} catch (NumberFormatException e1) {
+						lblNepostojeciClanIli.setVisible(true);
+						return;
+					}
+					
+					boolean paid = GUIController.payMembership(id, endDate);
+					
+					if (paid) {
+						lblNepostojeciClanIli.setVisible(false);
+						JOptionPane.showMessageDialog(null, "Clanarina uspesno uplacena");
+						dispose();
+					} else {
+						lblNepostojeciClanIli.setVisible(true);
+					}
+				}
+			});
 			btnUplati.setBounds(79, 119, 89, 23);
 		}
 		return btnUplati;

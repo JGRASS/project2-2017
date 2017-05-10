@@ -139,6 +139,10 @@ public class GUIController {
 	public static boolean enterRecord(int id) {
 		return Controller.enterRecord(id);
 	}
+	
+	public static boolean payMembership(int id, String endDate) {
+		return Controller.payMembership(id, endDate);
+	}
 
 	
 
