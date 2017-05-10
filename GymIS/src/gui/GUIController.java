@@ -111,6 +111,19 @@ public class GUIController {
 		return Controller.addNewMember(firstName, lastName, gender, birth, phone, end, h, w);
 	}
 
+	public static boolean removeMember(int id) {
+		return Controller.removeMember(id);
+	}
+
+	public static Member findMemberId(int id) {
+		return Controller.findMemberId(id);
+	}
+
+	public static boolean updateMember(int id, String firstName, String lastName, char gender, Date birth,
+			String phoneNumber, Date end, double h, double w) {
+		return Controller.updateMember(id, firstName, lastName, gender, birth, phoneNumber, end, h, w);
+	}
+
 	
 
 }

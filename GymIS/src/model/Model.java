@@ -64,20 +64,47 @@ public class Model {
 
 		ps.executeQuery();
 
+		int maxIdEvidence = -1;
+		int lastMemberIdMembers = -1;
+		ResultSet rs;
+
+		query = "SELECT MAX(membersId) FROM Evidence";
+		ps = con.prepareStatement(query);
+		rs = ps.executeQuery();
+		rs.next();
+		maxIdEvidence = rs.getInt(1);
+
+		query = "SELECT MAX(id) FROM Members";
+		ps = con.prepareStatement(query);
+		rs = ps.executeQuery();
+		rs.next();
+		lastMemberIdMembers = rs.getInt(1);
+
+		if (lastMemberIdMembers < maxIdEvidence) {
+			query = "UPDATE Members SET id=? WHERE id=?";
+			ps = con.prepareStatement(query);
+			ps.setInt(1, maxIdEvidence + 1);
+			ps.setInt(2, lastMemberIdMembers);
+			ps.executeQuery();
+		}
+
 		ps.close();
 		con.close();
 	}
 
-	public void removeMember(int id) throws SQLException {
+	public boolean removeMember(int id) throws SQLException {
 		Connection con = connector.connect();
 		String query = "DELETE FROM Members WHERE id=?";
 
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, id);
-		ps.executeQuery();
+
+		int temp = 0;
+		temp = ps.executeUpdate();
 
 		ps.close();
 		con.close();
+		return (temp != 0) ? true : false;
 
 	}
 
@@ -89,9 +116,15 @@ public class Model {
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
-
+		
+		boolean exist = rs.next();
+		if (exist == false) {
+			rs.close();
+			ps.close();
+			con.close();
+			return null;
+		}
 		int i = 0;
-		rs.next();
 		m.setId(rs.getInt(++i));
 		m.setFirstName(rs.getString(++i));
 		m.setLastName(rs.getString(++i));
@@ -175,7 +208,10 @@ public class Model {
 
 	}
 
-	public void payMembership(int id, String date) throws SQLException { // date u formatu "yyyy-mm-dd"
+	public void payMembership(int id, String date) throws SQLException { // date
+																			// u
+																			// formatu
+																			// "yyyy-mm-dd"
 		Connection con = connector.connect();
 		String query = "UPDATE Members SET endDate=? WHERE id=?";
 
@@ -190,108 +226,109 @@ public class Model {
 	}
 
 	/*
-	First we use findMemberId, method returns object Member,
-	and we fill all TxtFields in GUI with that data
-	then we change attributes we want to change in that Member object
-	then we use updateMember, method UPDATEs all column, nevermind they are changed or not
-	*/
-	
+	 * First we use findMemberId, method returns object Member, and we fill all
+	 * TxtFields in GUI with that data then we change attributes we want to
+	 * change in that Member object then we use updateMember, method UPDATEs all
+	 * column, nevermind they are changed or not
+	 */
+
 	public void updateMember(Member m) throws SQLException {
 		Connection con = connector.connect();
 		String query = "UPDATE Members SET "
 				+ "firstName=?, lastName=?, gender=?, birthDate=?, phoneNumber=?, endDate=?, height=?, weight=?"
 				+ " WHERE id=?";
-		
+
 		PreparedStatement ps = con.prepareStatement(query);
 		int i = 0;
 		ps.setString(++i, m.getFirstName());
 		ps.setString(++i, m.getLastName());
 		ps.setString(++i, String.valueOf(m.getGender()));
-		
-		if (m.getBirthdate() != null) 
+
+		if (m.getBirthdate() != null)
 			ps.setDate(++i, m.getEndDate());
-		else 
+		else
 			ps.setNull(++i, Types.DATE);
-		
-		
+
 		if (m.getPhoneNumber() != null)
 			ps.setString(++i, m.getPhoneNumber());
-		else ps.setNull(++i, Types.VARCHAR);
-		
+		else
+			ps.setNull(++i, Types.VARCHAR);
+
 		ps.setDate(++i, m.getEndDate());
-		
+
 		if (m.getHeight() != 0.0)
-			ps.setDouble(++i, m.getHeight());//No need for if != null, default value of double is 0.0
-		else ps.setNull(++i, Types.DOUBLE);
-		
-		if (m.getWeight() != 0.0) 
+			ps.setDouble(++i, m.getHeight());// No need for if != null, default
+												// value of double is 0.0
+		else
+			ps.setNull(++i, Types.DOUBLE);
+
+		if (m.getWeight() != 0.0)
 			ps.setDouble(++i, m.getWeight());
-		else ps.setNull(++i, Types.DOUBLE);
-		
+		else
+			ps.setNull(++i, Types.DOUBLE);
+
 		ps.setInt(++i, m.getId());
-		
+
 		ps.executeQuery();
-		
+
 		ps.close();
 		con.close();
 
 	}
-
 
 	public void enterRecord(int id) throws SQLException {
 		Connection con = connector.connect();
 		String query = "INSERT INTO Evidence(membersID) VALUES (?)";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, id);
-		
+
 		ps.executeQuery();
-		
+
 		ps.close();
 		con.close();
-		
+
 	}
-	
+
 	public boolean logInGymWorker(String username, String pass) throws SQLException {
 		Connection con = connector.connect();
 		String query = "SELECT id FROM GymWorkers WHERE username=? AND passwrd=?";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setString(1, username);
 		ps.setString(2, pass);
-		
 
 		ResultSet rs = ps.executeQuery();
 		rs.next();
-		try{
+		try {
 			rs.getInt(1);
 			return true;
 		} catch (SQLDataException e) {
 			return false;
 		}
 	}
-	
-	public LinkedList<Timestamp> getEvidenceOfMember(int memId) throws SQLException{
+
+	public LinkedList<Timestamp> getEvidenceOfMember(int memId) throws SQLException {
 		LinkedList<Timestamp> tempLst = new LinkedList<Timestamp>();
 		Connection con = connector.connect();
 		String query = "SELECT id,timeStmp FROM Evidence WHERE membersId=?";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, memId);
 		ResultSet rs = ps.executeQuery();
-		
-		while(rs.next()){ 
+
+		while (rs.next()) {
 			Timestamp tempTimeStamp = new Timestamp();
-			
+
 			tempTimeStamp.setId(rs.getInt(1));
 			tempTimeStamp.setDate(rs.getDate(2));
 			tempTimeStamp.setTime(rs.getTime(2));
-			
+
 			tempLst.add(tempTimeStamp);
 		}
-		
+
 		rs.close();
 		ps.close();
 		con.close();
 		return tempLst;
-		
+
 	}
-	
+
 }

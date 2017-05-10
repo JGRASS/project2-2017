@@ -34,7 +34,8 @@ public class RemoveMemberGUI extends JDialog {
 	 */
 	public RemoveMemberGUI() {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(RemoveMemberGUI.class.getResource("/resources/1493413484_gym.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(RemoveMemberGUI.class.getResource("/resources/1493413484_gym.png")));
 		setTitle("Izbrisi clana");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 353, 176);
@@ -60,6 +61,7 @@ public class RemoveMemberGUI extends JDialog {
 		}
 		return lblId;
 	}
+
 	private JTextField getTextField() {
 		if (textField == null) {
 			textField = new JTextField();
@@ -68,23 +70,37 @@ public class RemoveMemberGUI extends JDialog {
 		}
 		return textField;
 	}
+
 	private JButton getBtnIzbrisi() {
 		if (btnIzbrisi == null) {
 			btnIzbrisi = new JButton("Izbrisi");
 			btnIzbrisi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int a = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da izbrisete clana?", "Paznja!",
+					
+					
+					try {
+						int id = Integer.parseInt(textField.getText());
+						int a = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da izbrisete clana?", "Paznja!",
 							JOptionPane.YES_NO_CANCEL_OPTION);
-					if (a == JOptionPane.YES_OPTION) {
-						// TODO
+						if (a == JOptionPane.YES_OPTION) {
+							if(GUIController.removeMember(id)) {
+								JOptionPane.showMessageDialog(null, "Clan " + id + " uspesno uklonjen!");
+								dispose();
+							} else {
+								lblNePostojiTakav.setVisible(true);
+							}
+						} 
+					}catch (NumberFormatException e2) {
+							JOptionPane.showMessageDialog(null, "Pogresan unos, morate uneti ID clana!", "Greska", JOptionPane.ERROR_MESSAGE);
+						}
 					}
 						
-				}
-			});
+				});
 			btnIzbrisi.setBounds(53, 107, 89, 23);
-		}
-		return btnIzbrisi;
+		}return btnIzbrisi;
+
 	}
+
 	private JButton getBtnOdustani() {
 		if (btnOdustani == null) {
 			btnOdustani = new JButton("Odustani");
@@ -97,6 +113,7 @@ public class RemoveMemberGUI extends JDialog {
 		}
 		return btnOdustani;
 	}
+
 	private JLabel getLblNePostojiTakav() {
 		if (lblNePostojiTakav == null) {
 			lblNePostojiTakav = new JLabel("Ne postoji takav clan!");

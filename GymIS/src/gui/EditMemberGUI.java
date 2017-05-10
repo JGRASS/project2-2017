@@ -4,8 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import domen.Member;
+
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -13,7 +17,9 @@ import javax.swing.JDialog;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.TextComponent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.awt.event.ActionEvent;
 
 public class EditMemberGUI extends JDialog {
@@ -127,6 +133,26 @@ public class EditMemberGUI extends JDialog {
 	private JButton getBtnPronadji() {
 		if (btnPronadji == null) {
 			btnPronadji = new JButton("Pronadji");
+			btnPronadji.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					int id = Integer.parseInt(textFieldId.getText());
+					Member tempMember = GUIController.findMemberId(id);
+					if (tempMember == null) {
+						lblNePostojiTakav.setVisible(true);
+						return;
+					}
+					textFieldId.setEnabled(false);
+					textFieldIme.setText(tempMember.getFirstName());
+					textFieldPrezime.setText(tempMember.getLastName());
+					textFieldPol.setText(tempMember.getGender() + "");
+					textFieldClanarina.setText(tempMember.getEndDate().toString());
+					textFieldTelefon.setText((tempMember.getPhoneNumber() != null) ? tempMember.getPhoneNumber() : "");
+					textFieldDatumRodj.setText((tempMember.getBirthdate() != null) ? tempMember.getBirthdate().toString() : "");
+					textFieldVisina.setText(tempMember.getHeight() + "");
+					textFieldTezina.setText(tempMember.getWeight() + "");
+				}
+			});
 			btnPronadji.setBounds(10, 183, 89, 23);
 		}
 		return btnPronadji;
@@ -301,6 +327,59 @@ public class EditMemberGUI extends JDialog {
 	private JButton getBtnIzmeni() {
 		if (btnIzmeni == null) {
 			btnIzmeni = new JButton("Izmeni");
+			btnIzmeni.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					int id = Integer.parseInt(textFieldId.getText());
+					String firstName = textFieldIme.getText();
+					String lastName = textFieldPrezime.getText();
+					String gender = textFieldPol.getText();
+					String endDate = textFieldClanarina.getText();
+					String phoneNumber = textFieldTelefon.getText();
+					String birthdate = textFieldDatumRodj.getText();
+					String height = textFieldVisina.getText();
+					String weight = textFieldTezina.getText();
+					
+					if (firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() ||
+							endDate == null || endDate.isEmpty() || gender == null || gender.isEmpty() || gender.length() > 1) {
+						lblObaveznaPoljaNisu.setVisible(true);
+						return;
+					}
+					
+					Date birth, end;
+					double h = 0, w = 0;
+					
+					try {
+						h = Double.parseDouble(height);
+						w = Double.parseDouble(weight);
+					} catch (NumberFormatException e) {
+						
+					}
+					
+					try {
+						end = Date.valueOf(endDate);
+					} catch (Exception e) {
+						lblObaveznaPoljaNisu.setVisible(true);
+						return;
+					}
+					
+					try {
+						birth = Date.valueOf(birthdate);
+					} catch (Exception e2) {
+						birth = null;
+					}
+					
+					boolean updated = GUIController.updateMember(id, firstName, lastName, gender.charAt(0), birth,
+							phoneNumber, end, h, w);
+							
+					if (updated) {
+						JOptionPane.showMessageDialog(null, "Clan uspesno izmenjen!");
+						dispose();
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "Clan nije izmenjen!", "Greska", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
 			btnIzmeni.setBounds(196, 206, 89, 23);
 		}
 		return btnIzmeni;

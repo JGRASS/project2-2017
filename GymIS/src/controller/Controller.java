@@ -1,13 +1,17 @@
 package controller;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import domen.Member;
 import model.Model;
 import system_operations.SOAddNewMember;
+import system_operations.SOEditMember;
+import system_operations.SOFindMemberId;
 import system_operations.SOGetAllMembers;
 import system_operations.SOLogIn;
+import system_operations.SORemoveMember;
 
 public class Controller {
 	private static Model model = new Model();
@@ -26,6 +30,22 @@ public class Controller {
 	public static boolean addNewMember(String firstName, String lastName, char gender, Date birth, String phone, Date end,
 			double h, double w) {
 		return SOAddNewMember.execute(model, firstName, lastName, gender, birth, phone, end, h, w);
+	}
+
+
+	public static boolean removeMember(int id) {
+		return SORemoveMember.execute(model,id);
+	}
+
+
+	public static Member findMemberId(int id) {
+		return SOFindMemberId.execute(model, id);
+	}
+
+
+	public static boolean updateMember(int id, String firstName, String lastName, char gender, Date birth,
+			String phoneNumber, Date end, double h, double w) {
+		return SOEditMember.execute(model, id, firstName, lastName, gender, birth, phoneNumber, end, h, w);
 	}
 	
 }

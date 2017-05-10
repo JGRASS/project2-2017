@@ -8,7 +8,7 @@ import model.Model;
 
 public class SOEditMember {
 
-	public static void execute(Model m, int id, String firstName, String lastName, char gender, Date birthdate,
+	public static boolean execute(Model m, int id, String firstName, String lastName, char gender, Date birthdate,
 			String phoneNumber, Date endDate, double height, double weight) {
 
 		Member tempMemb = new Member(firstName, lastName, gender, birthdate, phoneNumber, endDate,
@@ -19,9 +19,11 @@ public class SOEditMember {
 		
 		try {
 			m.updateMember(tempMemb);
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 
 	}

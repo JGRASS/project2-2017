@@ -276,7 +276,7 @@ public class AddNewMemberGUI extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 					String firstName = textFieldIme.getText();
 					String lastName = textFieldPrezime.getText();
-					char gender = comboBox.getSelectedItem().toString().charAt(0);
+					String gender = comboBox.getSelectedItem().toString();
 					String birthdate = textFieldDatumRodjenja.getText();
 					String phone = textFieldTelefon.getText();
 					String endDate = textFieldClanarina.getText();
@@ -284,7 +284,7 @@ public class AddNewMemberGUI extends JDialog {
 					String weight = textFieldTezina.getText();
 					
 					if (firstName == null || firstName == "" || lastName == null || lastName == "" ||
-							endDate == null || endDate == "") {
+							endDate == null || endDate == "" || gender == null || gender.isEmpty() || gender.length() > 1) {
 						lblObaveznaPoljaNisu.setVisible(true);
 						return;
 					}
@@ -312,9 +312,7 @@ public class AddNewMemberGUI extends JDialog {
 						birth = null;
 					}
 					
-					//Member m = new Member(1, firstName, lastName, gender, birth, phone, null, end, h, w);
-					
-					boolean added = GUIController.addNewMember(firstName, lastName, gender, birth, phone, end, h, w);
+					boolean added = GUIController.addNewMember(firstName, lastName, gender.charAt(0), birth, phone, end, h, w);
 					
 					if (added) {
 						JOptionPane.showMessageDialog(null, "Novi clan uspesno dodat!");
