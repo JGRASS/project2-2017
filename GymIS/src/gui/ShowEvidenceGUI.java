@@ -30,22 +30,6 @@ public class ShowEvidenceGUI extends JDialog {
 	private JLabel lblNePostojiTakav;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ShowEvidenceGUI frame = new ShowEvidenceGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public ShowEvidenceGUI() {

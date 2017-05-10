@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -33,22 +32,6 @@ public class SigningFormGUI extends JFrame {
 	private JButton btnOdustani;
 	private JLabel lblPogresniPodaci;
 	private JPasswordField passwordField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SigningFormGUI frame = new SigningFormGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -113,7 +96,9 @@ public class SigningFormGUI extends JFrame {
 			btnPrijaviSe.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// TODO ovo mora da se zavrsi
-					lblPogresniPodaci.setVisible(true);
+					//lblPogresniPodaci.setVisible(true);
+					
+					
 				}
 			});
 			btnPrijaviSe.setBounds(88, 180, 89, 23);

@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
@@ -51,28 +50,12 @@ public class MainWindowGUI extends JFrame {
 	private JButton btnEvidentiraj;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindowGUI frame = new MainWindowGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public MainWindowGUI() {
 		setMinimumSize(new Dimension(870, 498));
 		setTitle("GymIS");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 868, 498);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
@@ -132,7 +115,7 @@ public class MainWindowGUI extends JFrame {
 			btnDodajNovog = new JButton("Dodaj novog");
 			btnDodajNovog.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					 new AddNewMemberGUI().setVisible(true);
+					GUIController.showWindowAddNewMember();
 				}
 			});
 			btnDodajNovog.setPreferredSize(new Dimension(120, 23));
@@ -144,7 +127,7 @@ public class MainWindowGUI extends JFrame {
 			btnIzmeniClana = new JButton("Izmeni clana");
 			btnIzmeniClana.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new EditMemberGUI().setVisible(true);
+					GUIController.showWindowEditMember();
 				}
 			});
 			btnIzmeniClana.setPreferredSize(new Dimension(120, 23));
@@ -156,7 +139,7 @@ public class MainWindowGUI extends JFrame {
 			btnIzbrisiClana = new JButton("Izbrisi clana");
 			btnIzbrisiClana.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new RemoveMemberGUI().setVisible(true);
+					GUIController.showWindowRemoveMember();
 				}
 			});
 			btnIzbrisiClana.setPreferredSize(new Dimension(120, 23));
@@ -168,7 +151,7 @@ public class MainWindowGUI extends JFrame {
 			btnPretraga = new JButton("Pretraga");
 			btnPretraga.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new FindMemberGUI().setVisible(true);
+					GUIController.showWindowFindMember();
 				}
 			});
 			btnPretraga.setPreferredSize(new Dimension(120, 23));
@@ -180,7 +163,7 @@ public class MainWindowGUI extends JFrame {
 			btnUplata = new JButton("Uplata");
 			btnUplata.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new PayMembershipGUI().setVisible(true);
+					GUIController.showWindowPayMembership();
 				}
 			});
 			btnUplata.setPreferredSize(new Dimension(120, 23));
@@ -305,7 +288,7 @@ public class MainWindowGUI extends JFrame {
 			btnEvidencijaDolazaka = new JButton("Evidencija");
 			btnEvidencijaDolazaka.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new ShowEvidenceGUI().setVisible(true);
+					GUIController.showWindowShowEvidence();
 				}
 			});
 			btnEvidencijaDolazaka.setPreferredSize(new Dimension(120, 23));
@@ -317,7 +300,7 @@ public class MainWindowGUI extends JFrame {
 			btnEvidentiraj = new JButton("Evidentiraj");
 			btnEvidentiraj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new RecordGUI().setVisible(true);
+					GUIController.showWindowRecord();
 				}
 			});
 			btnEvidentiraj.setPreferredSize(new Dimension(120, 23));

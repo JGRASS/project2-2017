@@ -55,22 +55,6 @@ public class AddNewMemberGUI extends JDialog {
 	private JLabel label_1;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddNewMemberGUI frame = new AddNewMemberGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public AddNewMemberGUI() {
