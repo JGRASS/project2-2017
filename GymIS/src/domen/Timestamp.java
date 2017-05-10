@@ -34,7 +34,7 @@ public class Timestamp {
 
 	@Override
 	public String toString() {
-		return "ID: " + getId() + " Date: " + getDate() + " Time: " + getTime();
+		return "Date: " + getDate() + " Time: " + getTime();
 	}
 
 }

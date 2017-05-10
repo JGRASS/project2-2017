@@ -41,6 +41,18 @@ public class Member {
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
+	
+	public Member(String firstName, String lastName, char gender, Date birthdate, String phoneNumber,
+			Date endDate, double height, double weight) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.birthdate = birthdate;
+		this.phoneNumber = phoneNumber;
+		this.endDate = endDate;
+		this.height = height;
+		this.weight = weight;
+	}
 
 	public int getId() {
 		return id;
