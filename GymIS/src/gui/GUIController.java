@@ -49,6 +49,11 @@ public class GUIController {
 		if (option == JOptionPane.YES_OPTION)
 			System.exit(0);
 	}
+	
+	public static void showMainWindow() {
+		mainWindowGUI = new MainWindowGUI();
+		mainWindowGUI.setVisible(true);
+	}
 
 	public static void showWindowAddNewMember() {
 		addNewMemberGUI = new AddNewMemberGUI();
@@ -85,5 +90,11 @@ public class GUIController {
 		recordGUI = new RecordGUI();
 		recordGUI.setVisible(true);
 	}
+
+	public static boolean logIn(String username, String pass) {
+		return false;
+	}
+
+	
 
 }
