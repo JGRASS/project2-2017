@@ -6,6 +6,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
+import controller.Controller;
+
 public class GUIController {
 	private static MainWindowGUI mainWindowGUI;
 	private static AddNewMemberGUI addNewMemberGUI;
@@ -26,16 +28,6 @@ public class GUIController {
 				try {
 					signingFormGUI = new SigningFormGUI();
 					signingFormGUI.setVisible(true);
-					// -----------------------------------
-					mainWindowGUI = new MainWindowGUI();
-					mainWindowGUI.setVisible(true);
-					mainWindowGUI.setLocationRelativeTo(null);
-					mainWindowGUI.addWindowListener(new WindowAdapter() {
-						@Override
-						public void windowClosing(WindowEvent e) {
-							exitApplication();
-						}
-					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,9 +42,18 @@ public class GUIController {
 			System.exit(0);
 	}
 	
+	// Showing windows
+	// ==================================
 	public static void showMainWindow() {
 		mainWindowGUI = new MainWindowGUI();
 		mainWindowGUI.setVisible(true);
+		mainWindowGUI.setLocationRelativeTo(null);
+		mainWindowGUI.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				exitApplication();
+			}
+		});
 	}
 
 	public static void showWindowAddNewMember() {
@@ -91,8 +92,10 @@ public class GUIController {
 		recordGUI.setVisible(true);
 	}
 
+	//===============================================
+	
 	public static boolean logIn(String username, String pass) {
-		return false;
+		return Controller.logIn(username, pass);
 	}
 
 	
