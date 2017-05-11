@@ -284,7 +284,7 @@ public class AddNewMemberGUI extends JDialog {
 					String weight = textFieldTezina.getText();
 					
 					if (firstName == null || firstName == "" || lastName == null || lastName == "" ||
-							endDate == null || endDate == "" || gender == null || gender.isEmpty() || gender.length() > 1) {
+							endDate == null || endDate == "" ) {
 						lblObaveznaPoljaNisu.setVisible(true);
 						return;
 					}
