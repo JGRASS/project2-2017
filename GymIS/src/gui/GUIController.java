@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import controller.Controller;
 import domen.Member;
+import domen.Timestamp;
 
 public class GUIController {
 	private static MainWindowGUI mainWindowGUI;
@@ -20,6 +21,7 @@ public class GUIController {
 	private static RecordGUI recordGUI;
 	private static RemoveMemberGUI removeMemberGUI;
 	private static ShowEvidenceGUI showEvidenceGUI;
+	private static EvidenceGUI evidenceGUI;
 	private static SigningFormGUI signingFormGUI;
 
 	/**
@@ -89,6 +91,11 @@ public class GUIController {
 		showEvidenceGUI = new ShowEvidenceGUI();
 		showEvidenceGUI.setVisible(true);
 	}
+	
+	public static void showWindowEvidence() {
+		evidenceGUI = new EvidenceGUI();
+		evidenceGUI.setVisible(true);
+	}
 
 	public static void showWindowRecord() {
 		recordGUI = new RecordGUI();
@@ -142,6 +149,34 @@ public class GUIController {
 	
 	public static boolean payMembership(int id, String endDate) {
 		return Controller.payMembership(id, endDate);
+	}
+
+	public static boolean showEvidenceForId(int id) {
+		evidenceGUI = new EvidenceGUI();
+		
+		
+		LinkedList<Timestamp> records = Controller.getAllRecords(id);
+		String text = "";
+		if(records == null || records.size() == 0) {
+			showEvidenceGUI.setErrorLabelVisible(true);
+			evidenceGUI = null;
+			return false;
+		}
+		Member member = Controller.findMemberId(id);
+		
+		for (Timestamp timestamp : records) {
+			text = text + timestamp.getDate().toString() + " " + timestamp.getTime().toString() + "\n\n";
+		}
+		
+		evidenceGUI.setTextInTextArea(text);
+		evidenceGUI.setAttributes(id, member.getFirstName(), member.getLastName(), member.getEndDate().toString());
+		evidenceGUI.setVisible(true);
+		return true;
+	}
+
+	public static void disposeEvidence() {
+		evidenceGUI.dispose();
+		evidenceGUI = null;
 	}
 
 	

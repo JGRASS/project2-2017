@@ -72,6 +72,24 @@ public class ShowEvidenceGUI extends JDialog {
 	private JButton getBtnPrikaziEvidenciju() {
 		if (btnPrikaziEvidenciju == null) {
 			btnPrikaziEvidenciju = new JButton("Prikazi evidenciju");
+			btnPrikaziEvidenciju.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					int id;
+					try {
+						id = Integer.parseInt(textField.getText());
+					} catch (NumberFormatException e) {
+						lblNePostojiTakav.setVisible(true);
+						return;
+					}
+					if(GUIController.showEvidenceForId(id)) {
+						dispose();	
+					} else {
+						lblNePostojiTakav.setVisible(true);
+						return;
+					}
+					
+				}
+			});
 			btnPrikaziEvidenciju.setBounds(30, 103, 140, 23);
 		}
 		return btnPrikaziEvidenciju;
@@ -81,6 +99,7 @@ public class ShowEvidenceGUI extends JDialog {
 			btnOdustani = new JButton("Odustani");
 			btnOdustani.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					GUIController.disposeEvidence();
 					dispose();
 				}
 			});
@@ -90,10 +109,14 @@ public class ShowEvidenceGUI extends JDialog {
 	}
 	private JLabel getLblNePostojiTakav() {
 		if (lblNePostojiTakav == null) {
-			lblNePostojiTakav = new JLabel("Ne postoji takav clan!");
+			lblNePostojiTakav = new JLabel("Ne postoji takav clan u evidenciji!");
 			lblNePostojiTakav.setForeground(Color.RED);
-			lblNePostojiTakav.setBounds(114, 74, 168, 14);
+			lblNePostojiTakav.setBounds(114, 74, 224, 14);
 		}
 		return lblNePostojiTakav;
+	}
+
+	protected void setErrorLabelVisible(boolean b) {
+		lblNePostojiTakav.setVisible(b);
 	}
 }
