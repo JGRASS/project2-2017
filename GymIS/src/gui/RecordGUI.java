@@ -47,6 +47,7 @@ public class RecordGUI extends JDialog {
 		contentPane.add(getBtnEvidentiraj());
 		contentPane.add(getBtnOdustani());
 		contentPane.add(getLblNePostojiTakav());
+		this.getRootPane().setDefaultButton(btnEvidentiraj);
 		lblNePostojiTakav.setVisible(false);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);

@@ -48,6 +48,7 @@ public class RemoveMemberGUI extends JDialog {
 		contentPane.add(getBtnIzbrisi());
 		contentPane.add(getBtnOdustani());
 		contentPane.add(getLblNePostojiTakav());
+		this.getRootPane().setDefaultButton(btnIzbrisi);
 		lblNePostojiTakav.setVisible(false);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);

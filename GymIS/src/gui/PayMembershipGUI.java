@@ -54,6 +54,7 @@ public class PayMembershipGUI extends JDialog {
 		contentPane.add(getBtnUplati());
 		contentPane.add(getBtnOdustani());
 		contentPane.add(getLblNepostojeciClanIli());
+		this.getRootPane().setDefaultButton(btnUplati);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
 	}

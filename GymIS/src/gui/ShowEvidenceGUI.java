@@ -47,6 +47,7 @@ public class ShowEvidenceGUI extends JDialog {
 		contentPane.add(getBtnPrikaziEvidenciju());
 		contentPane.add(getBtnOdustani());
 		contentPane.add(getLblNePostojiTakav());
+		this.getRootPane().setDefaultButton(btnPrikaziEvidenciju);
 		lblNePostojiTakav.setVisible(false);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);

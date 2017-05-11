@@ -54,6 +54,7 @@ public class SigningFormGUI extends JFrame {
 		contentPane.add(getBtnOdustani());
 		contentPane.add(getLblPogresniPodaci());
 		contentPane.add(getPasswordField());
+		this.getRootPane().setDefaultButton(btnPrijaviSe);
 		this.setLocationRelativeTo(null);
 	}
 	private JLabel getLblUsername() {
