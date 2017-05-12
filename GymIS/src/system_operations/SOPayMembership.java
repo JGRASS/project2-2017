@@ -1,5 +1,6 @@
 package system_operations;
 
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 
 import model.Model;
@@ -12,10 +13,10 @@ public class SOPayMembership {
 		try {
 			m.payMembership(id, endDate);
 			return true;
+		} catch(SQLDataException e2) {
+			return false;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return true;
+			return false;
 		}
 	}
 }

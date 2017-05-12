@@ -3,6 +3,8 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,9 +13,11 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class PayMembershipGUI extends JDialog {
@@ -85,7 +89,13 @@ public class PayMembershipGUI extends JDialog {
 	}
 	private JTextField getTextField() {
 		if (textField == null) {
-			textField = new JTextField();
+			try {
+				MaskFormatter formatter = new MaskFormatter("####-##-##");
+				textField = new JFormattedTextField(formatter);
+			} catch (ParseException e) {
+				textField = new JFormattedTextField();
+			}
+			//textField = new JTextField();
 			textField.setBounds(249, 37, 86, 20);
 			textField.setColumns(10);
 		}

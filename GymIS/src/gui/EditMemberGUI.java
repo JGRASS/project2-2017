@@ -3,6 +3,7 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import domen.Member;
 
@@ -13,11 +14,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class EditMemberGUI extends JDialog {
@@ -149,6 +152,15 @@ public class EditMemberGUI extends JDialog {
 					textFieldDatumRodj.setText((tempMember.getBirthdate() != null) ? tempMember.getBirthdate().toString() : "");
 					textFieldVisina.setText(tempMember.getHeight() + "");
 					textFieldTezina.setText(tempMember.getWeight() + "");
+					
+					textFieldIme.setEnabled(true);
+					textFieldPrezime.setEnabled(true);
+					textFieldPol.setEnabled(true);
+					textFieldClanarina.setEnabled(true);
+					textFieldTelefon.setEnabled(true);
+					textFieldDatumRodj.setEnabled(true);
+					textFieldVisina.setEnabled(true);
+					textFieldTezina.setEnabled(true);
 				}
 			});
 			btnPronadji.setBounds(10, 183, 89, 23);
@@ -208,6 +220,7 @@ public class EditMemberGUI extends JDialog {
 	private JTextField getTextFieldIme() {
 		if (textFieldIme == null) {
 			textFieldIme = new JTextField();
+			textFieldIme.setEnabled(false);
 			textFieldIme.setBounds(213, 21, 112, 20);
 			textFieldIme.setColumns(10);
 		}
@@ -216,6 +229,7 @@ public class EditMemberGUI extends JDialog {
 	private JTextField getTextFieldPrezime() {
 		if (textFieldPrezime == null) {
 			textFieldPrezime = new JTextField();
+			textFieldPrezime.setEnabled(false);
 			textFieldPrezime.setBounds(213, 43, 112, 20);
 			textFieldPrezime.setColumns(10);
 		}
@@ -224,6 +238,7 @@ public class EditMemberGUI extends JDialog {
 	private JTextField getTextFieldPol() {
 		if (textFieldPol == null) {
 			textFieldPol = new JTextField();
+			textFieldPol.setEnabled(false);
 			textFieldPol.setBounds(213, 68, 112, 20);
 			textFieldPol.setColumns(10);
 		}
@@ -231,7 +246,14 @@ public class EditMemberGUI extends JDialog {
 	}
 	private JTextField getTextFieldClanarina() {
 		if (textFieldClanarina == null) {
-			textFieldClanarina = new JTextField();
+			try {
+				MaskFormatter formatter = new MaskFormatter("####-##-##");
+				textFieldClanarina = new JFormattedTextField(formatter);
+				textFieldClanarina.setEnabled(false);
+			} catch (ParseException e) {
+				textFieldClanarina = new JFormattedTextField();
+			}
+			//textFieldClanarina = new JTextField();
 			textFieldClanarina.setBounds(213, 109, 112, 20);
 			textFieldClanarina.setColumns(10);
 		}
@@ -268,6 +290,7 @@ public class EditMemberGUI extends JDialog {
 	private JTextField getTextFieldTelefon() {
 		if (textFieldTelefon == null) {
 			textFieldTelefon = new JTextField();
+			textFieldTelefon.setEnabled(false);
 			textFieldTelefon.setBounds(442, 21, 112, 20);
 			textFieldTelefon.setColumns(10);
 		}
@@ -275,7 +298,14 @@ public class EditMemberGUI extends JDialog {
 	}
 	private JTextField getTextFieldDatumRodj() {
 		if (textFieldDatumRodj == null) {
-			textFieldDatumRodj = new JTextField();
+			try {
+				MaskFormatter formatter = new MaskFormatter("####-##-##");
+				textFieldDatumRodj = new JFormattedTextField(formatter);
+				textFieldDatumRodj.setEnabled(false);
+			} catch (ParseException e) {
+				textFieldDatumRodj = new JFormattedTextField();
+			}
+			//textFieldDatumRodj = new JTextField();
 			textFieldDatumRodj.setBounds(442, 43, 112, 20);
 			textFieldDatumRodj.setColumns(10);
 		}
@@ -284,6 +314,7 @@ public class EditMemberGUI extends JDialog {
 	private JTextField getTextFieldVisina() {
 		if (textFieldVisina == null) {
 			textFieldVisina = new JTextField();
+			textFieldVisina.setEnabled(false);
 			textFieldVisina.setBounds(442, 68, 112, 20);
 			textFieldVisina.setColumns(10);
 		}
@@ -292,6 +323,7 @@ public class EditMemberGUI extends JDialog {
 	private JTextField getTextFieldTezina() {
 		if (textFieldTezina == null) {
 			textFieldTezina = new JTextField();
+			textFieldTezina.setEnabled(false);
 			textFieldTezina.setBounds(442, 109, 112, 20);
 			textFieldTezina.setColumns(10);
 		}

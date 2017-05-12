@@ -204,7 +204,7 @@ public class FindMemberGUI extends JDialog {
 					lblPolPrikaz.setText(m.getGender() + "");
 					lblClanarinaPrikaz.setText(m.getEndDate().toString());
 					lblDatumUpisaPrikaz.setText(m.getStartDate().toString());
-					lblDatumRodjenjaPrikaz.setText(m.getBirthdate().toString());
+					lblDatumRodjenjaPrikaz.setText((m.getBirthdate() != null) ? m.getBirthdate().toString() : "");
 					lblTelefonPrikaz.setText(m.getPhoneNumber());
 					lblVisinaPrikaz.setText(m.getHeight() + "");
 					lblTezinaPrikaz.setText(m.getWeight() + "");

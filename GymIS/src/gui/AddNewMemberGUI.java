@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import java.awt.Toolkit;
 
@@ -12,12 +13,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class AddNewMemberGUI extends JDialog {
@@ -173,7 +176,13 @@ public class AddNewMemberGUI extends JDialog {
 	}
 	private JTextField getTextFieldClanarina() {
 		if (textFieldClanarina == null) {
-			textFieldClanarina = new JTextField();
+			try {
+				MaskFormatter formatter = new MaskFormatter("####-##-##");
+				textFieldClanarina = new JFormattedTextField(formatter);
+			} catch (ParseException e) {
+				textFieldClanarina = new JFormattedTextField();
+			}
+			//textFieldClanarina = new JTextField();
 			textFieldClanarina.setBounds(208, 109, 111, 20);
 			textFieldClanarina.setColumns(10);
 		}
@@ -224,7 +233,13 @@ public class AddNewMemberGUI extends JDialog {
 	}
 	private JTextField getTextFieldDatumRodjenja() {
 		if (textFieldDatumRodjenja == null) {
-			textFieldDatumRodjenja = new JTextField();
+			try {
+				MaskFormatter formatter = new MaskFormatter("####-##-##");
+				textFieldDatumRodjenja = new JFormattedTextField(formatter);
+			} catch (ParseException e) {
+				textFieldDatumRodjenja = new JFormattedTextField();
+			}
+			//textFieldDatumRodjenja = new JTextField();
 			textFieldDatumRodjenja.setBounds(430, 46, 111, 20);
 			textFieldDatumRodjenja.setColumns(10);
 		}
