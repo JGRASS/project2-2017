@@ -4,9 +4,9 @@ import java.sql.SQLException;
 
 import model.Model;
 
-public interface SORemoveMember {
+public class SORemoveMember {
 
-	static boolean execute(Model model, int id) {
+	public static boolean execute(Model model, int id) {
 		try {
 			return model.removeMember(id);
 		} catch (SQLException e) {
