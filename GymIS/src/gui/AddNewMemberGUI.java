@@ -32,8 +32,6 @@ public class AddNewMemberGUI extends JDialog {
 	
 	private JPanel contentPane;
 	private JLabel label;
-	private JLabel lblId;
-	private JTextField textFieldId;
 	private JLabel lblIme;
 	private JLabel lblPrezime;
 	private JLabel lblPol;
@@ -73,8 +71,6 @@ public class AddNewMemberGUI extends JDialog {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.add(getLabel());
-		contentPane.add(getLblId());
-		contentPane.add(getTextFieldId());
 		contentPane.add(getLblIme());
 		contentPane.add(getLblPrezime());
 		contentPane.add(getLblPol());
@@ -111,22 +107,6 @@ public class AddNewMemberGUI extends JDialog {
 			label.setBounds(10, 11, 111, 90);
 		}
 		return label;
-	}
-	private JLabel getLblId() {
-		if (lblId == null) {
-			lblId = new JLabel("ID:");
-			lblId.setBounds(10, 112, 46, 14);
-		}
-		return lblId;
-	}
-	private JTextField getTextFieldId() {
-		if (textFieldId == null) {
-			textFieldId = new JTextField();
-			textFieldId.setEnabled(false);
-			textFieldId.setBounds(10, 137, 111, 20);
-			textFieldId.setColumns(10);
-		}
-		return textFieldId;
 	}
 	private JLabel getLblIme() {
 		if (lblIme == null) {

@@ -1,4 +1,4 @@
-package gui;
+	package gui;
 
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
@@ -159,10 +159,14 @@ public class GUIController {
 		String text = "";
 		if(records == null || records.size() == 0) {
 			showEvidenceGUI.setErrorLabelVisible(true);
-			evidenceGUI = null;
+//			evidenceGUI = null;
 			return false;
 		}
 		Member member = Controller.findMemberId(id);
+		if (member == null) {
+			showEvidenceGUI.setErrorLabelVisible(true);
+			return false;
+		}
 		
 		for (Timestamp timestamp : records) {
 			text = text + timestamp.getDate().toString() + " " + timestamp.getTime().toString() + "\n\n";
