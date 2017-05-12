@@ -23,7 +23,6 @@ import domen.Member;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 

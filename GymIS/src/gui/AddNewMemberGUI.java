@@ -1,12 +1,9 @@
 package gui;
 
-import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import domen.Member;
 
 import java.awt.Toolkit;
 

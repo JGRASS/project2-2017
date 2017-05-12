@@ -96,7 +96,6 @@ public class SigningFormGUI extends JFrame {
 			btnPrijaviSe = new JButton("Prijavi se");
 			btnPrijaviSe.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// TODO ovo mora da se zavrsi
 					String username = textFieldUsername.getText();
 					String pass = passwordField.getText();
 					if (GUIController.logIn(username, pass)) {

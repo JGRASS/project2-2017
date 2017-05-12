@@ -4,7 +4,7 @@ import java.sql.*;
 /**
  * Klasa koja omogucava konekciju sa relacionom bazom podataka.
  * 
- * @author Miljn Ignjatovic
+ * @author Miljan Ignjatovic
  * @version 1.0
  */
 public class DBConnector {
