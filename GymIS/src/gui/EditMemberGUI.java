@@ -144,6 +144,9 @@ public class EditMemberGUI extends JDialog {
 						return;
 					}
 					textFieldId.setEnabled(false);
+					btnPronadji.setEnabled(false);
+					btnIzmeni.setEnabled(true);
+					
 					textFieldIme.setText(tempMember.getFirstName());
 					textFieldPrezime.setText(tempMember.getLastName());
 					textFieldPol.setText(tempMember.getGender() + "");
@@ -357,6 +360,7 @@ public class EditMemberGUI extends JDialog {
 	private JButton getBtnIzmeni() {
 		if (btnIzmeni == null) {
 			btnIzmeni = new JButton("Izmeni");
+			btnIzmeni.setEnabled(false);
 			btnIzmeni.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					int id = Integer.parseInt(textFieldId.getText());

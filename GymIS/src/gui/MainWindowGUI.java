@@ -25,6 +25,7 @@ import javax.swing.JMenu;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.awt.event.ActionEvent;
+import javax.swing.JMenuItem;
 
 
 public class MainWindowGUI extends JFrame {
@@ -52,6 +53,10 @@ public class MainWindowGUI extends JFrame {
 	private JMenu mnAbout;
 	private JButton btnEvidencijaDolazaka;
 	private JButton btnEvidentiraj;
+	private JMenuItem mntmOAutorima;
+	private JMenuItem mntmPrikaziSve;
+	private JMenuItem mntmOdjaviSe;
+	private JMenuItem mntmIzadji;
 
 	/**
 	 * Create the frame.
@@ -321,12 +326,16 @@ public class MainWindowGUI extends JFrame {
 	private JMenu getMnFile() {
 		if (mnFile == null) {
 			mnFile = new JMenu("File");
+			mnFile.add(getMntmPrikaziSve());
+			mnFile.add(getMntmOdjaviSe());
+			mnFile.add(getMntmIzadji());
 		}
 		return mnFile;
 	}
 	private JMenu getMnAbout() {
 		if (mnAbout == null) {
 			mnAbout = new JMenu("About");
+			mnAbout.add(getMntmOAutorima());
 		}
 		return mnAbout;
 	}
@@ -353,5 +362,50 @@ public class MainWindowGUI extends JFrame {
 			btnEvidentiraj.setPreferredSize(new Dimension(120, 23));
 		}
 		return btnEvidentiraj;
+	}
+	private JMenuItem getMntmOAutorima() {
+		if (mntmOAutorima == null) {
+			mntmOAutorima = new JMenuItem("O autorima");
+			mntmOAutorima.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIController.showInfoAboutAuthors();
+				}
+			});
+		}
+		return mntmOAutorima;
+	}
+	private JMenuItem getMntmPrikaziSve() {
+		if (mntmPrikaziSve == null) {
+			mntmPrikaziSve = new JMenuItem("Prikazi sve");
+			mntmPrikaziSve.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					showMembersInTable(GUIController.getAllMembers());
+				}
+			});
+		}
+		return mntmPrikaziSve;
+	}
+	private JMenuItem getMntmOdjaviSe() {
+		if (mntmOdjaviSe == null) {
+			mntmOdjaviSe = new JMenuItem("Odjavi se");
+			mntmOdjaviSe.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+					GUIController.main(null);
+				}
+			});
+		}
+		return mntmOdjaviSe;
+	}
+	private JMenuItem getMntmIzadji() {
+		if (mntmIzadji == null) {
+			mntmIzadji = new JMenuItem("Izadji");
+			mntmIzadji.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIController.exitApplication();
+				}
+			});
+		}
+		return mntmIzadji;
 	}
 }

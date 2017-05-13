@@ -40,7 +40,7 @@ public class GUIController {
 		});
 	}
 
-	private static void exitApplication() {
+	protected static void exitApplication() {
 		int option = JOptionPane.showConfirmDialog(mainWindowGUI, "Da li zelite da zatvorite aplikaciju?", "Zatvaranje",
 				JOptionPane.YES_NO_OPTION);
 		if (option == JOptionPane.YES_OPTION)
@@ -181,6 +181,10 @@ public class GUIController {
 	public static void disposeEvidence() {
 		evidenceGUI.dispose();
 		evidenceGUI = null;
+	}
+
+	public static void showInfoAboutAuthors() {
+		JOptionPane.showMessageDialog(mainWindowGUI, "Autori: Miljan Ignjatovic\n              Filip Egeric\nFON, Beograd 2017", "O autorima", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	
