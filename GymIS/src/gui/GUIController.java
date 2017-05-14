@@ -179,7 +179,8 @@ public class GUIController {
 	}
 
 	public static void disposeEvidence() {
-		evidenceGUI.dispose();
+		if(evidenceGUI != null)
+			evidenceGUI.dispose();
 		evidenceGUI = null;
 	}
 

@@ -137,12 +137,19 @@ public class EditMemberGUI extends JDialog {
 			btnPronadji.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
-					int id = Integer.parseInt(textFieldId.getText());
+					int id;
+					try {
+						id = Integer.parseInt(textFieldId.getText());
+					} catch (NumberFormatException e) {
+						lblNePostojiTakav.setVisible(true);
+						return;
+					}
 					Member tempMember = GUIController.findMemberId(id);
 					if (tempMember == null) {
 						lblNePostojiTakav.setVisible(true);
 						return;
 					}
+					lblNePostojiTakav.setVisible(false);
 					textFieldId.setEnabled(false);
 					btnPronadji.setEnabled(false);
 					btnIzmeni.setEnabled(true);
