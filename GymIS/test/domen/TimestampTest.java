@@ -45,7 +45,7 @@ public class TimestampTest {
 		t.setId(1);
 		t.setDate(Date.valueOf("2011-11-11"));
 		t.setTime(Time.valueOf("01:01:01"));
-		assertEquals("ID: 1 Date: 2011-11-11 Time: 01:01:01", t.toString());
+		assertEquals("Date: 2011-11-11 Time: 01:01:01", t.toString());
 		
 	}
 
