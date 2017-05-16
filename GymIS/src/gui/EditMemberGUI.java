@@ -106,6 +106,7 @@ public class EditMemberGUI extends JDialog {
 		lblObaveznaPoljaNisu.setVisible(false);
 		lblNePostojiTakav.setVisible(false);
 		label.setVisible(false);
+		this.getRootPane().setDefaultButton(btnPronadji);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
 	}

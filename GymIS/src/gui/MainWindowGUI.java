@@ -312,6 +312,7 @@ public class MainWindowGUI extends JFrame {
 			table.getColumnModel().getColumn(4).setPreferredWidth(86);
 			table.getColumnModel().getColumn(7).setPreferredWidth(100);
 			table.setName("Tabela");
+			table.getTableHeader().setReorderingAllowed(false);
 		}
 		return table;
 	}
