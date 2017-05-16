@@ -16,6 +16,12 @@ public class Model {
 
 	private static DBConnector connector = new DBConnector();
 
+	/**
+	 * Metoda vraca sve clanove iz baze podataka.
+	 * 
+	 * @return lista objekata {@link Member}
+	 * @throws SQLException
+	 */
 	public LinkedList<Member> getAllMembers() throws SQLException {
 		LinkedList<Member> tempMembers = new LinkedList<Member>();
 		Connection con = connector.connect();
@@ -46,6 +52,13 @@ public class Model {
 		return tempMembers;
 	}
 
+	/**
+	 * Metoda za dodavanje clana u bazu podataka.
+	 * 
+	 * @param m
+	 *            - objekat klase {@link Member}
+	 * @throws SQLException
+	 */
 	public void addNewMember(Member m) throws SQLException {
 		Connection con = connector.connect();
 		String query = "INSERT INTO "
@@ -92,6 +105,14 @@ public class Model {
 		con.close();
 	}
 
+	/**
+	 * Metoda za uklanjanje clana iz baze podataka.
+	 * 
+	 * @param id
+	 *            - jedinstveni indetifikator clana.
+	 * @return True ako je clan usmesno uklonjen.
+	 * @throws SQLException
+	 */
 	public boolean removeMember(int id) throws SQLException {
 		Connection con = connector.connect();
 		String query = "DELETE FROM Members WHERE id=?";
@@ -108,6 +129,14 @@ public class Model {
 
 	}
 
+	/**
+	 * Metoda za pronalazenje clana.
+	 * 
+	 * @param id
+	 *            - jedinstveni indetifikator clana.
+	 * @return {@link Member} ako clan postoji u bazi.
+	 * @throws SQLException
+	 */
 	public Member findMemberId(int id) throws SQLException {
 		Member m = new Member();
 		Connection con = connector.connect();
@@ -116,7 +145,7 @@ public class Model {
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
-		
+
 		boolean exist = rs.next();
 		if (exist == false) {
 			rs.close();
@@ -142,6 +171,14 @@ public class Model {
 		return m;
 	}
 
+	/**
+	 * Metoda za pronalazenje svih clanova po imenu.
+	 * 
+	 * @param firstName
+	 *            - Ime clana.
+	 * @return Lista objekata {@link Member}
+	 * @throws SQLException
+	 */
 	public LinkedList<Member> findMembersFirstName(String firstName) throws SQLException {
 		LinkedList<Member> tempMemebers = new LinkedList<Member>();
 		Connection con = connector.connect();
@@ -175,6 +212,14 @@ public class Model {
 
 	}
 
+	/**
+	 * Metoda za pronalazenje svih clanova po prezimenu.
+	 * 
+	 * @param firstName
+	 *            - Prezime clana.
+	 * @return Lista objekata {@link Member}
+	 * @throws SQLException
+	 */
 	public LinkedList<Member> findMembersLastName(String lastName) throws SQLException {
 		LinkedList<Member> tempMemebers = new LinkedList<Member>();
 		Connection con = connector.connect();
@@ -208,10 +253,17 @@ public class Model {
 
 	}
 
-	public void payMembership(int id, String date) throws SQLException { // date
-																			// u
-																			// formatu
-																			// "yyyy-mm-dd"
+	/**
+	 * Metoda za uplatu clanarine clana.
+	 * 
+	 * @param id
+	 *            - jedinstveni indetifikator clana.
+	 * @param date
+	 *            - datum do kog uplacuje clanarinu.
+	 * @throws SQLException
+	 */
+	public void payMembership(int id, String date) throws SQLException {
+		// date u formatu "yyyy-mm-dd"
 		Connection con = connector.connect();
 		String query = "UPDATE Members SET endDate=? WHERE id=?";
 
@@ -225,14 +277,21 @@ public class Model {
 		con.close();
 	}
 
-	/*
-	 * First we use findMemberId, method returns object Member, and we fill all
-	 * TxtFields in GUI with that data then we change attributes we want to
-	 * change in that Member object then we use updateMember, method UPDATEs all
-	 * column, nevermind they are changed or not
+	/**
+	 * Metoda za izmenu podataka o clanu.
+	 * 
+	 * @param m
+	 *            - objekat klaze {@link Member}
+	 * @throws SQLException
 	 */
-
 	public void updateMember(Member m) throws SQLException {
+		/*
+		 * First we use findMemberId, method returns object Member, and we fill
+		 * all TxtFields in GUI with that data then we change attributes we want
+		 * to change in that Member object then we use updateMember, method
+		 * UPDATEs all column, nevermind they are changed or not
+		 */
+
 		Connection con = connector.connect();
 		String query = "UPDATE Members SET "
 				+ "firstName=?, lastName=?, gender=?, birthDate=?, phoneNumber=?, endDate=?, height=?, weight=?"
@@ -276,6 +335,13 @@ public class Model {
 
 	}
 
+	/**
+	 * Metoda za evidenciju dolaska clana.
+	 * 
+	 * @param id
+	 *            - Jedinstveni indetifikator clana.
+	 * @throws SQLException
+	 */
 	public void enterRecord(int id) throws SQLException {
 		Connection con = connector.connect();
 		String query = "INSERT INTO Evidence(membersID) VALUES (?)";
@@ -289,6 +355,16 @@ public class Model {
 
 	}
 
+	/**
+	 * Metoda za prijavu radnika.
+	 * 
+	 * @param username
+	 *            - Korisnicko ime radnika.
+	 * @param pass
+	 *            - Lozinka radnika.
+	 * @return True ako je radnik uspesno ulogovan.
+	 * @throws SQLException
+	 */
 	public boolean logInGymWorker(String username, String pass) throws SQLException {
 		Connection con = connector.connect();
 		String query = "SELECT id FROM GymWorkers WHERE username=? AND passwrd=?";
@@ -306,6 +382,15 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Metoda vraca listu objekata {@link Timestamp} koji predstavlja dolazak
+	 * clana.
+	 * 
+	 * @param memId
+	 *            - Jedinsrveni indetifikator clana.
+	 * @return Listu objekata {@link Timestamp}
+	 * @throws SQLException
+	 */
 	public LinkedList<Timestamp> getEvidenceOfMember(int memId) throws SQLException {
 		LinkedList<Timestamp> tempLst = new LinkedList<Timestamp>();
 		Connection con = connector.connect();
